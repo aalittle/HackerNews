@@ -10,6 +10,7 @@
 #import "ArticleTableViewCell.h"
 #import "DataParser.h"
 #import "Article.h"
+#import "DateHelper.h"
 
 @implementation RootViewController
 
@@ -20,7 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+        
     NSURL *hackerURL = [PRPConnection hackerNewsURLWith:0.30 commentsBoost:0.15 timeBoost:500.0];
     
     PRPConnectionProgressBlock progress = ^(PRPConnection *connection) {};
@@ -102,7 +103,8 @@
     Article *theArticle = [articles objectAtIndex:indexPath.row];
     cell.labelTitle.text = theArticle.title;
     cell.labelSubtitle.text = [NSString stringWithFormat:@"%d points by %@ (via %@)", [theArticle.points intValue], theArticle.username, theArticle.domain]; 
-    
+    cell.labelSinceCreated.text = [DateHelper timeSince:[theArticle createDate]];
+                              
     return cell;
 }
 
@@ -156,13 +158,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-	*/
+    
+    Article *theArticle = [articles objectAtIndex:indexPath.row];
+    
+    PRPWebViewController *webView = [[PRPWebViewController alloc] init];
+    webView.url = [NSURL URLWithString:theArticle.url];
+    webView.showsDoneButton = NO;
+    webView.delegate = self;
+    webView.backgroundColor = [UIColor whiteColor];
+    
+    [self.navigationController pushViewController:webView animated:YES];
+    
+    [webView release];
 }
 
 - (void)didReceiveMemoryWarning

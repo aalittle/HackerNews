@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PRPConnection.h"
+#import "PRPWebViewController.h"
 
-@interface RootViewController : UITableViewController {
+@interface RootViewController : UITableViewController <PRPWebViewControllerDelegate> {
     
     UINib *complexCellNib;
     PRPConnection *download;

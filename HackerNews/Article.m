@@ -48,4 +48,22 @@
     [super dealloc];
 }
 
+-(NSDate *)createDate {
+    
+    NSDate *theDate = nil;
+    
+    if (self.create_ts) {
+        
+        // Convert string to date object
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+        dateFormat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+        dateFormat.calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+        dateFormat.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease];
+        theDate = [dateFormat dateFromString:self.create_ts]; 
+        NSLog(@"date %@", [theDate description]);
+    }
+    return theDate;
+}
+
 @end

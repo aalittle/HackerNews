@@ -39,6 +39,8 @@
 		7786E89B13FDD34F00BD2093 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E88C13FDD34E00BD2093 /* SBJsonStreamParser.m */; };
 		7786E89C13FDD34F00BD2093 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E88E13FDD34E00BD2093 /* SBJsonParser.m */; };
 		7786E89D13FDD34F00BD2093 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E89113FDD34F00BD2093 /* NSObject+SBJson.m */; };
+		7786E8AA13FE90B000BD2093 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E8A813FE90B000BD2093 /* PRPWebViewController.m */; };
+		7786E8B713FE9D3900BD2093 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E8B613FE9D3900BD2093 /* DateHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,11 @@
 		7786E89013FDD34E00BD2093 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
 		7786E89113FDD34F00BD2093 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		7786E89213FDD34F00BD2093 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
+		7786E8A713FE90B000BD2093 /* PRPWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewController.h; sourceTree = "<group>"; };
+		7786E8A813FE90B000BD2093 /* PRPWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPWebViewController.m; sourceTree = "<group>"; };
+		7786E8A913FE90B000BD2093 /* PRPWebViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewControllerDelegate.h; sourceTree = "<group>"; };
+		7786E8B513FE9D3900BD2093 /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
+		7786E8B613FE9D3900BD2093 /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +171,7 @@
 		7786E80B13FDBCAC00BD2093 /* HackerNews */ = {
 			isa = PBXGroup;
 			children = (
+				7786E8B413FE9D2100BD2093 /* Helpers */,
 				7786E89E13FDD35700BD2093 /* SB JSON */,
 				7786E86913FDBFBE00BD2093 /* iOS Recipes */,
 				7786E85D13FDBE8A00BD2093 /* Data Model */,
@@ -234,6 +242,9 @@
 		7786E86913FDBFBE00BD2093 /* iOS Recipes */ = {
 			isa = PBXGroup;
 			children = (
+				7786E8A713FE90B000BD2093 /* PRPWebViewController.h */,
+				7786E8A813FE90B000BD2093 /* PRPWebViewController.m */,
+				7786E8A913FE90B000BD2093 /* PRPWebViewControllerDelegate.h */,
 				7786E86A13FDBFEE00BD2093 /* PRPNibBasedTableViewCell.h */,
 				7786E86B13FDBFEE00BD2093 /* PRPNibBasedTableViewCell.m */,
 				7786E85213FDBD6700BD2093 /* PRPConnection.h */,
@@ -270,6 +281,15 @@
 				7786E89013FDD34E00BD2093 /* SBJson.h */,
 			);
 			name = "SB JSON";
+			sourceTree = "<group>";
+		};
+		7786E8B413FE9D2100BD2093 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7786E8B513FE9D3900BD2093 /* DateHelper.h */,
+				7786E8B613FE9D3900BD2093 /* DateHelper.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +417,8 @@
 				7786E89B13FDD34F00BD2093 /* SBJsonStreamParser.m in Sources */,
 				7786E89C13FDD34F00BD2093 /* SBJsonParser.m in Sources */,
 				7786E89D13FDD34F00BD2093 /* NSObject+SBJson.m in Sources */,
+				7786E8AA13FE90B000BD2093 /* PRPWebViewController.m in Sources */,
+				7786E8B713FE9D3900BD2093 /* DateHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -45,5 +45,6 @@
 @property (nonatomic, retain) NSString *url;
 @property (nonatomic, retain) NSString *username;
 
+-(NSDate *)createDate;
 
 @end
