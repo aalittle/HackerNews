@@ -50,7 +50,7 @@
                                                       owner:self
                                                     options:nil];
     
-    infoView = [[nibViews objectAtIndex:0] retain];
+    self.infoView = [nibViews objectAtIndex:0];
     
     //set the left button to display the info screen
     [self.navigationItem.leftBarButtonItem setAction:@selector(displayInfoView)];
@@ -60,7 +60,8 @@
     [self.navigationItem.rightBarButtonItem setAction:@selector(displayConfigViewController)];
     [self.navigationItem.rightBarButtonItem setTarget:self];
 
-    
+    [self saveWith:0.30 commentsBoost:0.15 timeBoost:500.0];
+  /*  
     NSURL *hackerURL = [PRPConnection hackerNewsURLWith:0.30 commentsBoost:0.15 timeBoost:500.0];
     
     PRPConnectionProgressBlock progress = ^(PRPConnection *connection) {};
@@ -83,6 +84,7 @@
                                      completionBlock:complete];
     self.download.progressThreshold = 5;
     [self.download start];     
+   */
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -237,7 +239,7 @@
 -(void)displayConfigViewController {
     
     ConfigViewController *viewController = [[ConfigViewController alloc] initWithNibName:@"ConfigViewController" bundle:nil];
-    
+    viewController.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     
     [self presentModalViewController:navController animated:YES];
@@ -245,5 +247,36 @@
     [navController release];
     [viewController release];
 }
+
+#pragma ConfigViewControllerDelegate methods
+
+-(void)saveWith:(float)pointsBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost {
+    
+    NSURL *hackerURL = [PRPConnection hackerNewsURLWith:pointsBoost commentsBoost:cBoost timeBoost:tBoost];
+    
+    NSLog(@"%@", [hackerURL description]);
+    PRPConnectionProgressBlock progress = ^(PRPConnection *connection) {};
+    PRPConnectionCompletionBlock complete = ^(PRPConnection *connection, NSError *error) {
+        if (error) {
+            
+            //handle the error
+            
+        } else {
+            
+            //time to parse the data
+            self.articles = [DataParser extractArticlesFrom:connection.downloadData];
+            [self.tableView reloadData];
+        }
+    };
+    
+    self.download = [PRPConnection connectionWithURL:hackerURL
+                                       progressBlock:progress
+                                     completionBlock:complete];
+    self.download.progressThreshold = 5;
+    [self.download start]; 
+    
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 
 @end

@@ -8,8 +8,38 @@
 
 #import "ConfigViewController.h"
 
+#define FRESHNESS_DEFAULT 500.00
+#define POINTS_DEFAULT      0.30      
+#define COMMENTS_DEFAULT    0.15
 
 @implementation ConfigViewController
+
+@synthesize freshness;
+@synthesize points;
+@synthesize comments;
+@synthesize resetSliders;
+
+@synthesize delegate;
+
+- (void)dealloc
+{
+    [freshness release], freshness = nil;
+    [points release], points = nil;
+    [comments release], comments = nil;
+    [resetSliders release], resetSliders = nil;
+    
+    [super dealloc];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    self.freshness = nil;
+    self.points = nil;
+    self.comments = nil;
+    self.resetSliders = nil;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -18,11 +48,6 @@
         // Custom initialization
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,19 +64,37 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-}
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save)] autorelease];
+    self.navigationItem.title = @"Configure Search";
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void)close {
+    
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
+-(IBAction)reset {
+    
+    self.freshness.value = FRESHNESS_DEFAULT;
+    self.points.value    = POINTS_DEFAULT;
+    self.comments.value  = COMMENTS_DEFAULT;
+}
+
+-(void)save {
+    
+    if (delegate && [delegate respondsToSelector:@selector(saveWith:commentsBoost:timeBoost:)]) {
+
+        [delegate saveWith:points.value commentsBoost:comments.value timeBoost:freshness.value];
+    }
 }
 
 @end

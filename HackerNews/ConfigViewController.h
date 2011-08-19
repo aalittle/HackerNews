@@ -7,10 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ConfigViewControllerDelegate.h"
 
 
 @interface ConfigViewController : UIViewController {
+   
+    UISlider *freshness;
+    UISlider *points;
+    UISlider *comments;
+    UIBarButtonItem *resetSliders;
     
+    id<ConfigViewControllerDelegate> delegate;
 }
+
+@property (nonatomic, retain) IBOutlet UISlider *freshness;
+@property (nonatomic, retain) IBOutlet UISlider *points;
+@property (nonatomic, retain) IBOutlet UISlider *comments;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *resetSliders;
+@property (nonatomic, assign) id<ConfigViewControllerDelegate> delegate;
 
 @end

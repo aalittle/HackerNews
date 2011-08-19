@@ -125,6 +125,7 @@
 		7786E8C213FEC48D00BD2093 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
 		7786E8C313FEC48E00BD2093 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		7786E8C413FEC48F00BD2093 /* ConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigViewController.xib; sourceTree = "<group>"; };
+		7786E8C713FEE1FB00BD2093 /* ConfigViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewControllerDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +195,7 @@
 				7786E81513FDBCAC00BD2093 /* HackerNewsAppDelegate.m */,
 				7786E81A13FDBCAC00BD2093 /* RootViewController.h */,
 				7786E81B13FDBCAC00BD2093 /* RootViewController.m */,
+				7786E8C713FEE1FB00BD2093 /* ConfigViewControllerDelegate.h */,
 				7786E8C213FEC48D00BD2093 /* ConfigViewController.h */,
 				7786E8C313FEC48E00BD2093 /* ConfigViewController.m */,
 				7786E8B813FEB4A800BD2093 /* InfoView.h */,
