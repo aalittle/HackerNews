@@ -41,6 +41,11 @@
 		7786E89D13FDD34F00BD2093 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E89113FDD34F00BD2093 /* NSObject+SBJson.m */; };
 		7786E8AA13FE90B000BD2093 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E8A813FE90B000BD2093 /* PRPWebViewController.m */; };
 		7786E8B713FE9D3900BD2093 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E8B613FE9D3900BD2093 /* DateHelper.m */; };
+		7786E8BA13FEB4A800BD2093 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E8B913FEB4A800BD2093 /* InfoView.m */; };
+		7786E8BC13FEB4C600BD2093 /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7786E8BB13FEB4C600BD2093 /* InfoView.xib */; };
+		7786E8BF13FEB55600BD2093 /* headshot_andrew.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7786E8BE13FEB55600BD2093 /* headshot_andrew.jpg */; };
+		7786E8C513FEC49000BD2093 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E8C313FEC48E00BD2093 /* ConfigViewController.m */; };
+		7786E8C613FEC49000BD2093 /* ConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7786E8C413FEC48F00BD2093 /* ConfigViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +118,13 @@
 		7786E8A913FE90B000BD2093 /* PRPWebViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewControllerDelegate.h; sourceTree = "<group>"; };
 		7786E8B513FE9D3900BD2093 /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
 		7786E8B613FE9D3900BD2093 /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
+		7786E8B813FEB4A800BD2093 /* InfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoView.h; sourceTree = "<group>"; };
+		7786E8B913FEB4A800BD2093 /* InfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoView.m; sourceTree = "<group>"; };
+		7786E8BB13FEB4C600BD2093 /* InfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
+		7786E8BE13FEB55600BD2093 /* headshot_andrew.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = headshot_andrew.jpg; sourceTree = "<group>"; };
+		7786E8C213FEC48D00BD2093 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
+		7786E8C313FEC48E00BD2093 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
+		7786E8C413FEC48F00BD2093 /* ConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +194,10 @@
 				7786E81513FDBCAC00BD2093 /* HackerNewsAppDelegate.m */,
 				7786E81A13FDBCAC00BD2093 /* RootViewController.h */,
 				7786E81B13FDBCAC00BD2093 /* RootViewController.m */,
+				7786E8C213FEC48D00BD2093 /* ConfigViewController.h */,
+				7786E8C313FEC48E00BD2093 /* ConfigViewController.m */,
+				7786E8B813FEB4A800BD2093 /* InfoView.h */,
+				7786E8B913FEB4A800BD2093 /* InfoView.m */,
 				7786E80C13FDBCAC00BD2093 /* Supporting Files */,
 			);
 			path = HackerNews;
@@ -221,9 +237,12 @@
 		7786E85C13FDBE4B00BD2093 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7786E8BD13FEB55600BD2093 /* Images */,
 				7786E85A13FDBE3D00BD2093 /* ArticleTableViewCell.xib */,
+				7786E8C413FEC48F00BD2093 /* ConfigViewController.xib */,
 				7786E81713FDBCAC00BD2093 /* MainWindow.xib */,
 				7786E81D13FDBCAC00BD2093 /* RootViewController.xib */,
+				7786E8BB13FEB4C600BD2093 /* InfoView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -290,6 +309,14 @@
 				7786E8B613FE9D3900BD2093 /* DateHelper.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		7786E8BD13FEB55600BD2093 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7786E8BE13FEB55600BD2093 /* headshot_andrew.jpg */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,6 +390,9 @@
 				7786E81913FDBCAC00BD2093 /* MainWindow.xib in Resources */,
 				7786E81F13FDBCAC00BD2093 /* RootViewController.xib in Resources */,
 				7786E85B13FDBE3D00BD2093 /* ArticleTableViewCell.xib in Resources */,
+				7786E8BC13FEB4C600BD2093 /* InfoView.xib in Resources */,
+				7786E8BF13FEB55600BD2093 /* headshot_andrew.jpg in Resources */,
+				7786E8C613FEC49000BD2093 /* ConfigViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +449,8 @@
 				7786E89D13FDD34F00BD2093 /* NSObject+SBJson.m in Sources */,
 				7786E8AA13FE90B000BD2093 /* PRPWebViewController.m in Sources */,
 				7786E8B713FE9D3900BD2093 /* DateHelper.m in Sources */,
+				7786E8BA13FEB4A800BD2093 /* InfoView.m in Sources */,
+				7786E8C513FEC49000BD2093 /* ConfigViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +544,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Little (ARHN4M8PM5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Little (ARHN4M8PM5)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -519,6 +553,8 @@
 				INFOPLIST_FILE = "HackerNews/HackerNews-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5FF602E5-60A3-47EE-ADBE-823286CEE484";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5FF602E5-60A3-47EE-ADBE-823286CEE484";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -527,12 +563,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Little (ARHN4M8PM5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Little (ARHN4M8PM5)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HackerNews/HackerNews-Prefix.pch";
 				INFOPLIST_FILE = "HackerNews/HackerNews-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5FF602E5-60A3-47EE-ADBE-823286CEE484";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5FF602E5-60A3-47EE-ADBE-823286CEE484";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

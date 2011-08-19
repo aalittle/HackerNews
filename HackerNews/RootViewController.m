@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "ConfigViewController.h"
 #import "ArticleTableViewCell.h"
 #import "DataParser.h"
 #import "Article.h"
@@ -17,11 +18,49 @@
 @synthesize complexCellNib;
 @synthesize download;
 @synthesize articles;
+@synthesize infoView;
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
+    // For example: self.myOutlet = nil;
+    self.complexCellNib = nil;
+    self.download = nil;
+    self.articles = nil;
+    self.infoView = nil;
+}
+
+- (void)dealloc
+{
+    [super dealloc];
+    [complexCellNib release], complexCellNib = nil;
+    [download release], download = nil;
+    [articles release], articles = nil;
+    [infoView release], infoView = nil;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+
+    //get the info view prepared for display
+    NSArray* nibViews = [[NSBundle mainBundle] loadNibNamed:@"InfoView"
+                                                      owner:self
+                                                    options:nil];
+    
+    infoView = [[nibViews objectAtIndex:0] retain];
+    
+    //set the left button to display the info screen
+    [self.navigationItem.leftBarButtonItem setAction:@selector(displayInfoView)];
+    [self.navigationItem.leftBarButtonItem setTarget:self];
+ 
+    //set the right button to display the config screen
+    [self.navigationItem.rightBarButtonItem setAction:@selector(displayConfigViewController)];
+    [self.navigationItem.rightBarButtonItem setTarget:self];
+
+    
     NSURL *hackerURL = [PRPConnection hackerNewsURLWith:0.30 commentsBoost:0.15 timeBoost:500.0];
     
     PRPConnectionProgressBlock progress = ^(PRPConnection *connection) {};
@@ -180,20 +219,31 @@
     // Relinquish ownership any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
 
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
-    self.complexCellNib = nil;
+-(void)displayInfoView {
+    
+    //set the action to close this view
+    [self.navigationItem.leftBarButtonItem setAction:@selector(closeInfoView)];
+    [self.view addSubview:infoView];
+
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-    [complexCellNib release], complexCellNib = nil;
+-(void)closeInfoView {
     
+    [self.navigationItem.leftBarButtonItem setAction:@selector(displayInfoView)];
+    [infoView removeFromSuperview];
+}
+
+-(void)displayConfigViewController {
+    
+    ConfigViewController *viewController = [[ConfigViewController alloc] initWithNibName:@"ConfigViewController" bundle:nil];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    [self presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    [viewController release];
 }
 
 @end
