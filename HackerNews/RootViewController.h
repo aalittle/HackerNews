@@ -13,12 +13,11 @@
     
     UINib *complexCellNib;
     PRPConnection *download;
-    NSMutableArray *articles;
+    NSMutableArray *articles;    
 }
 
 @property (nonatomic, retain) UINib *complexCellNib;
 @property (nonatomic, retain) PRPConnection *download;
 @property (nonatomic, retain) NSMutableArray *articles;
-
 
 @end

@@ -13,6 +13,7 @@
     
 }
 
+//Parse the response data into an array of Article objects.
 +(NSMutableArray *)extractArticlesFrom:(NSMutableData *)responseData;
 
 @end

@@ -44,6 +44,8 @@
     [type release];
     [url release];
     [username release];
+
+    [super dealloc];
 }
 
 @end

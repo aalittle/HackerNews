@@ -234,8 +234,6 @@
 		7786E86913FDBFBE00BD2093 /* iOS Recipes */ = {
 			isa = PBXGroup;
 			children = (
-				7786E89113FDD34F00BD2093 /* NSObject+SBJson.m */,
-				7786E89213FDD34F00BD2093 /* NSObject+SBJson.h */,
 				7786E86A13FDBFEE00BD2093 /* PRPNibBasedTableViewCell.h */,
 				7786E86B13FDBFEE00BD2093 /* PRPNibBasedTableViewCell.m */,
 				7786E85213FDBD6700BD2093 /* PRPConnection.h */,
@@ -247,6 +245,8 @@
 		7786E89E13FDD35700BD2093 /* SB JSON */ = {
 			isa = PBXGroup;
 			children = (
+				7786E89113FDD34F00BD2093 /* NSObject+SBJson.m */,
+				7786E89213FDD34F00BD2093 /* NSObject+SBJson.h */,
 				7786E87C13FDD34C00BD2093 /* SBJsonWriter.m */,
 				7786E87D13FDD34C00BD2093 /* SBJsonWriter.h */,
 				7786E87E13FDD34C00BD2093 /* SBJsonUTF8Stream.m */,
