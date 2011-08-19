@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'HackerNewsTests' target in the 'HackerNewsTests' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+#endif
