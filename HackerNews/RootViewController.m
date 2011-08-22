@@ -23,10 +23,12 @@
 
 @implementation RootViewController
 
+@synthesize myTableView;
 @synthesize complexCellNib;
 @synthesize download;
 @synthesize articles;
 @synthesize infoView;
+@synthesize progressView;
 
 - (void)viewDidUnload
 {
@@ -38,15 +40,20 @@
     self.download = nil;
     self.articles = nil;
     self.infoView = nil;
+    self.myTableView = nil;
+    self.progressView = nil;
 }
 
 - (void)dealloc
 {
-    [super dealloc];
+    [myTableView release], myTableView = nil;
     [complexCellNib release], complexCellNib = nil;
     [download release], download = nil;
     [articles release], articles = nil;
     [infoView release], infoView = nil;
+    [progressView release], progressView = nil;
+
+    [super dealloc];
 }
 
 - (void)viewDidLoad
@@ -59,15 +66,8 @@
                                                     options:nil];
     
     self.infoView = [nibViews objectAtIndex:0];
-    
-    //set the left button to display the info screen
-    [self.navigationItem.leftBarButtonItem setAction:@selector(displayInfoView)];
-    [self.navigationItem.leftBarButtonItem setTarget:self];
- 
-    //set the right button to display the config screen
-    [self.navigationItem.rightBarButtonItem setAction:@selector(displayConfigViewController)];
-    [self.navigationItem.rightBarButtonItem setTarget:self];
 
+    
     [self saveWith:0.30 commentsBoost:0.15 timeBoost:500.0];
 }
 
@@ -79,6 +79,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [self.myTableView deselectRowAtIndexPath:[self.myTableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -127,8 +129,30 @@
     // Configure the cell.
     Article *theArticle = [articles objectAtIndex:indexPath.row];
     cell.labelTitle.text = theArticle.title;
-    cell.labelSubtitle.text = [NSString stringWithFormat:@"%d points by %@ (via %@)", [theArticle.points intValue], theArticle.username, theArticle.domain]; 
-    cell.labelSinceCreated.text = [DateHelper timeSince:[theArticle createDate]];
+    
+    //construct the subtitle
+    NSMutableString *theSubtitle = [[NSMutableString alloc] init];
+    if (theArticle.points != nil) {
+        
+        [theSubtitle appendFormat:@"%d points", [theArticle.points intValue]];
+    }
+    if (theArticle.username != nil) {
+        
+        [theSubtitle appendFormat:@" by %@", theArticle.username];
+    }
+    if (theArticle.domain != nil) {
+        
+        [theSubtitle appendFormat:@" (via %@)", theArticle.domain];
+    }
+    
+    cell.labelSubtitle.text = theSubtitle;
+    
+    if ([theArticle createDate]) {
+
+        cell.labelSinceCreated.text = [DateHelper timeSince:[theArticle createDate]];
+    }
+    
+    [theSubtitle release];
                               
     return cell;
 }
@@ -191,7 +215,7 @@
     webView.url = [NSURL URLWithString:theArticle.url];
     webView.showsDoneButton = NO;
     webView.delegate = self;
-    webView.backgroundColor = [UIColor whiteColor];
+    webView.backgroundColor = [UIColor colorWithRed:14.0/255.0 green:101.0/255.0 blue:177.0/255.0 alpha:1.0];
     
     [self.navigationController pushViewController:webView animated:YES];
     
@@ -207,21 +231,22 @@
 }
 
 
--(void)displayInfoView {
+-(IBAction)displayInfoView {
     
     //set the action to close this view
-    [self.navigationItem.leftBarButtonItem setAction:@selector(closeInfoView)];
+    UIButton *theButton = (UIButton *)self.navigationItem.leftBarButtonItem.customView;
+    [theButton addTarget:self action:@selector(closeInfoView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:infoView];
-
 }
 
 -(void)closeInfoView {
     
-    [self.navigationItem.leftBarButtonItem setAction:@selector(displayInfoView)];
+    UIButton *theButton = (UIButton *)self.navigationItem.leftBarButtonItem.customView;
+    [theButton addTarget:self action:@selector(displayInfoView) forControlEvents:UIControlEventTouchUpInside];
     [infoView removeFromSuperview];
 }
 
--(void)displayConfigViewController {
+-(IBAction)displayConfigViewController {
     
     [self closeInfoView];
     
@@ -239,6 +264,19 @@
 
 -(void)saveWith:(float)pointsBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost {
     
+    //create a progress view indicator
+    if( !progressView ) {
+        progressView = [[MBProgressHUD alloc] initWithView:self.view];
+        progressView.detailsLabelFont = [UIFont fontWithName:@"Helvetica-Bold" size:16.0];
+    }
+    // Add progressView to screen
+    NSLog(@"ProgressView was added to the view");
+    [self.view addSubview:progressView];
+    progressView.delegate = self;    
+    progressView.labelText = @"Retrieving Articles";    
+    [progressView show:YES];
+
+    
     NSURL *hackerURL = [PRPConnection hackerNewsURLWith:pointsBoost commentsBoost:cBoost timeBoost:tBoost];
     
     NSLog(@"%@", [hackerURL description]);
@@ -247,12 +285,14 @@
         if (error) {
             
             //handle the error
+            [self.progressView hide:YES];
             
         } else {
             
             //time to parse the data
             self.articles = [DataParser extractArticlesFrom:connection.downloadData];
-            [self.tableView reloadData];
+            [self.myTableView reloadData];
+            [self.progressView hide:YES];
         }
     };
     
@@ -265,5 +305,10 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark MBProgressHUD delegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    NSLog(@"ProgressView was hidden from view.");
+}
 
 @end
