@@ -13,6 +13,14 @@
 #import "Article.h"
 #import "DateHelper.h"
 
+@interface RootViewController ()
+
+-(void)displayInfoView;
+-(void)closeInfoView;
+-(void)displayConfigViewController;
+
+@end
+
 @implementation RootViewController
 
 @synthesize complexCellNib;
@@ -61,30 +69,6 @@
     [self.navigationItem.rightBarButtonItem setTarget:self];
 
     [self saveWith:0.30 commentsBoost:0.15 timeBoost:500.0];
-  /*  
-    NSURL *hackerURL = [PRPConnection hackerNewsURLWith:0.30 commentsBoost:0.15 timeBoost:500.0];
-    
-    PRPConnectionProgressBlock progress = ^(PRPConnection *connection) {};
-    
-    PRPConnectionCompletionBlock complete = ^(PRPConnection *connection, NSError *error) {
-        if (error) {
-
-            //handle the error
-            
-        } else {
-            
-            //time to parse the data
-            self.articles = [DataParser extractArticlesFrom:connection.downloadData];
-            [self.tableView reloadData];
-        }
-    };
-    
-    self.download = [PRPConnection connectionWithURL:hackerURL
-                                       progressBlock:progress
-                                     completionBlock:complete];
-    self.download.progressThreshold = 5;
-    [self.download start];     
-   */
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -199,6 +183,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self closeInfoView];
     
     Article *theArticle = [articles objectAtIndex:indexPath.row];
     
@@ -238,10 +223,12 @@
 
 -(void)displayConfigViewController {
     
+    [self closeInfoView];
+    
     ConfigViewController *viewController = [[ConfigViewController alloc] initWithNibName:@"ConfigViewController" bundle:nil];
     viewController.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    
+    navController.navigationBar.tintColor = [UIColor colorWithRed:249.0/255.0 green:82.0/255.0 blue:0.0 alpha:1.0];
     [self presentModalViewController:navController animated:YES];
     
     [navController release];

@@ -58,7 +58,7 @@
 
 + (NSURL *)hackerNewsURLWith:(float)pointsBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost {
     
-    NSURL *theURL = [[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://api.thriftdb.com/api.hnsearch.com/items/_search?q=submission&weights[title]=0.0&weights[text]=0.0&weights[domain]=0.0&weights[username]=0.0&weights[type]=2.0&boosts[fields][points]=%f&boosts[fields][num_comments]=%f&boosts[functions][pow(2,div(div(ms(create_ts,NOW),3600000),72))]=%f&pretty_print=true", pointsBoost, cBoost, tBoost]] autorelease];
+    NSURL *theURL = [[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://api.thriftdb.com/api.hnsearch.com/items/_search?q=submission&limit=30&weights[title]=0.0&weights[text]=0.0&weights[domain]=0.0&weights[username]=0.0&weights[type]=2.0&boosts[fields][points]=%f&boosts[fields][num_comments]=%f&boosts[functions][pow(2,div(div(ms(create_ts,NOW),3600000),72))]=%f&pretty_print=true", pointsBoost, cBoost, tBoost]] autorelease];
     
     return theURL;
 }

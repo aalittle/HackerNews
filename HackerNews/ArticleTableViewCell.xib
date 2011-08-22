@@ -50,7 +50,7 @@
 							<object class="IBUILabel" id="786829472">
 								<reference key="NSNextResponder" ref="961899875"/>
 								<int key="NSvFlags">294</int>
-								<string key="NSFrame">{{9, 0}, {240, 48}}</string>
+								<string key="NSFrame">{{9, 0}, {258, 48}}</string>
 								<reference key="NSSuperview" ref="961899875"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="608995636"/>
@@ -67,9 +67,14 @@
 								</object>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwIDAAA</bytes>
+									<bytes key="NSRGB">MC4yMzM2OTU2NTIyIDAuMjMzNjk1NjUyMiAwLjIzMzY5NTY1MjIAA</bytes>
 								</object>
 								<nil key="IBUIHighlightedColor"/>
+								<object class="NSColor" key="IBUIShadowColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC45NzY0NzA1ODk2IDAuOTQwMzA1MDEyMiAwLjk0MDMwNTAxMjIAA</bytes>
+								</object>
+								<string key="IBUIShadowOffset">{0, 1}</string>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">10</float>
@@ -78,7 +83,7 @@
 							<object class="IBUILabel" id="608995636">
 								<reference key="NSNextResponder" ref="961899875"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{250, 0}, {59, 21}}</string>
+								<string key="NSFrame">{{253, 0}, {59, 21}}</string>
 								<reference key="NSSuperview" ref="961899875"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="103406177"/>
@@ -108,9 +113,10 @@
 							<object class="IBUILabel" id="103406177">
 								<reference key="NSNextResponder" ref="961899875"/>
 								<int key="NSvFlags">294</int>
-								<string key="NSFrame">{{9, 44}, {267, 21}}</string>
+								<string key="NSFrame">{{9, 48}, {287, 21}}</string>
 								<reference key="NSSuperview" ref="961899875"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -128,7 +134,7 @@
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
 						</object>
-						<string key="NSFrameSize">{298, 68}</string>
+						<string key="NSFrameSize">{320, 73}</string>
 						<reference key="NSSuperview" ref="865322412"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="786829472"/>
@@ -143,7 +149,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
-				<string key="NSFrameSize">{318, 68}</string>
+				<string key="NSFrameSize">{320, 73}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="961899875"/>
@@ -153,8 +159,16 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISeparatorStyle">1</int>
-				<int key="IBUIAccessoryType">1</int>
+				<int key="IBUISelectionStyle">2</int>
 				<reference key="IBUIContentView" ref="961899875"/>
+				<object class="NSCustomResource" key="IBUIImage">
+					<string key="NSClassName">NSImage</string>
+					<string key="NSResourceName">cell_background_lightgrey@2x.png</string>
+				</object>
+				<object class="NSCustomResource" key="IBUISelectedImage">
+					<string key="NSClassName">NSImage</string>
+					<string key="NSResourceName">cell_background_blue@2x.png</string>
+				</object>
 				<string key="IBUIReuseIdentifier">ArticleTableViewCell</string>
 			</object>
 		</object>
@@ -342,6 +356,19 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<bool key="EncodedWithXMLCoder">YES</bool>
+			<object class="NSArray" key="dict.sortedKeys">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>cell_background_blue@2x.png</string>
+				<string>cell_background_lightgrey@2x.png</string>
+			</object>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{640, 70}</string>
+				<string>{640, 70}</string>
+			</object>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">300</string>
 	</data>
 </archive>
