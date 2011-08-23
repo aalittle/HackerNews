@@ -21,6 +21,9 @@ const float PRPWebViewControllerFadeDuration = 0.5;
 
 - (void)fadeWebViewIn;
 - (void)resetBackgroundColor;
+- (void)updateForwardBackButtonStatus;
+- (void)launchSafari;
+- (void)emailLink;
 
 @end
 
@@ -35,6 +38,10 @@ const float PRPWebViewControllerFadeDuration = 0.5;
 @synthesize showsDoneButton;
 
 @synthesize delegate;
+@synthesize back;
+@synthesize forward;
+@synthesize refresh;
+@synthesize action;
 
 - (void)dealloc {
     [url release], url = nil;
@@ -42,6 +49,12 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     [backgroundColor release], backgroundColor = nil;
     [webView stopLoading], webView.delegate = nil, [webView release], webView = nil;
     [activityIndicator release], activityIndicator = nil;
+    [back release], back = nil;
+    [forward release], forward = nil;
+    [refresh release], refresh = nil;
+    [back release], back = nil;
+    [action release], action = nil;
+    
     [super dealloc];
 }
 
@@ -50,26 +63,27 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     
     self.webView = nil;
     self.activityIndicator = nil;
+    self.back = nil;
+    self.forward = nil;
+    self.action = nil;
+    self.refresh = nil;
 }
 
-- (void)loadView {
-    UIViewAutoresizing resizeAllMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    UIView *mainView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-    mainView.autoresizingMask = resizeAllMask;
-    self.view = mainView;
-    [mainView release];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
-    webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    UIViewAutoresizing resizeAllMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
     webView.autoresizingMask = resizeAllMask;
     webView.scalesPageToFit = YES;
     webView.delegate = self;
     [self.view addSubview:webView];
     
-    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin |
-                                        UIViewAutoresizingFlexibleRightMargin |
-                                        UIViewAutoresizingFlexibleBottomMargin |
-                                        UIViewAutoresizingFlexibleLeftMargin;						
+    UIViewAutoresizingFlexibleRightMargin |
+    UIViewAutoresizingFlexibleBottomMargin |
+    UIViewAutoresizingFlexibleLeftMargin;						
     CGRect aiFrame = self.activityIndicator.frame;
     CGFloat originX = (self.view.bounds.size.width - aiFrame.size.width) / 2;
     CGFloat originY = (self.view.bounds.size.height - aiFrame.size.height) / 2;
@@ -77,10 +91,7 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     aiFrame.origin.y = floorl(originY);
     self.activityIndicator.frame = aiFrame;
     [self.view addSubview:activityIndicator];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+    
     [self resetBackgroundColor];
     [self reload];
 }
@@ -171,6 +182,8 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     if ([self.delegate respondsToSelector:sel_didFinishLoading]) {
         [self.delegate webControllerDidFinishLoading:self];
     }
+    
+    [self updateForwardBackButtonStatus];
 }
 
 - (void)webView:(UIWebView *)wv didFailLoadWithError:(NSError *)error {
@@ -188,6 +201,110 @@ const float PRPWebViewControllerFadeDuration = 0.5;
             [alert release];
         }
     }
+    
+    [self updateForwardBackButtonStatus];
 }
+
+-(IBAction)onBack {
+    
+    [self.webView goBack];
+}
+
+-(IBAction)onForward {
+
+    [self.webView goForward];
+}
+
+-(IBAction)onRefresh {
+    
+    [self reload];
+}
+
+-(IBAction)onAction {
+ 
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[self.url description] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open in Safari", @"Mail Link", nil];
+    
+    [sheet showInView:self.view];
+}
+
+-(void)updateForwardBackButtonStatus {
+    
+    //update the back button
+    if ([self.webView canGoBack]) {
+        
+        self.back.enabled = YES;
+    }
+    else {
+        
+        self.back.enabled = NO;
+    }
+    
+    //update the forward button
+    if ([self.webView canGoForward]) {
+        
+        self.forward.enabled = YES;
+    }
+    else {
+        
+        self.forward.enabled = NO;
+    }
+}
+
+-(void)launchSafari {
+
+    [[UIApplication sharedApplication] openURL:self.url];
+}
+
+-(void)emailLink {
+    
+    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    mailController.mailComposeDelegate = self;
+	mailController.navigationBar.tintColor = [UIColor colorWithRed:249.0/255.0 green:82.0/255.0 blue:0.0 alpha:1.0];
+    
+	[mailController setSubject:@"interesting story"];
+	
+    NSString *emailBody = [self.url description];
+	[mailController setMessageBody:emailBody isHTML:NO];
+    
+	[self presentModalViewController:mailController animated:YES];
+    [mailController release];
+}
+
+#pragma MFMailComposer delegate
+
+// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the message field with the result of the operation.
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
+{	
+	// Notifies users about errors associated with the interface
+	switch (result)
+	{
+		case MFMailComposeResultCancelled:
+		case MFMailComposeResultSaved:
+		case MFMailComposeResultSent:
+		case MFMailComposeResultFailed:
+		default:
+			break;
+	}
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+
+#pragma UIActionSheetDelegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    //if the Safari button, then launch Safari
+    if (buttonIndex == 0) {
+        
+        [self launchSafari];
+    }
+    //if it's the Mail Link button, then launch the mail composer
+    else if (buttonIndex == 1) {
+        
+        [self emailLink];
+    }
+    
+}
+
 
 @end

@@ -13,7 +13,7 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>hacker_news_logo.png</string>
-		<string>hacker_news_logo.png</string>
+		<string>icon.png</string>
 		<string>hacker_news_logo@2x.png</string>
 		<string>hacker_news_logo@2x.png</string>
 	</array>
@@ -35,9 +35,9 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array/>
 	<key>UIPrerenderedIcon</key>
 	<true/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array/>
 </dict>
 </plist>

@@ -15,6 +15,7 @@
 @synthesize backButton;
 @synthesize follow;
 @synthesize email;
+@synthesize gradientBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +31,7 @@
     [backButton release], backButton = nil;
     [follow release], follow = nil;
     [email release], email = nil;
+    [gradientBar release], gradientBar = nil;
     
     [super dealloc];
 }
@@ -53,6 +55,9 @@
 
     self.follow.layer.borderColor = [UIColor grayColor].CGColor;
     self.follow.layer.borderWidth = 1.0f;
+    
+    self.gradientBar.layer.borderColor = [UIColor grayColor].CGColor;
+    self.gradientBar.layer.borderWidth = 1.0f;
 }
 
 - (void)viewDidUnload
@@ -63,6 +68,7 @@
     self.backButton = nil;
     self.follow = nil;
     self.email = nil;
+    self.gradientBar = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -76,4 +82,53 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+-(IBAction)onEmail {
+    
+    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    mailController.mailComposeDelegate = self;
+	mailController.navigationBar.tintColor = [UIColor colorWithRed:249.0/255.0 green:82.0/255.0 blue:0.0 alpha:1.0];
+    
+	[mailController setSubject:@"a quick message"];
+	
+    
+	// Set up recipients
+	NSArray *toRecipients = [NSArray arrayWithObject:@"aalittle@gmail.com"]; 
+    [mailController setToRecipients:toRecipients];
+		
+	[self presentModalViewController:mailController animated:YES];
+    [mailController release];
+}
+
+#pragma MFMailComposer delegate
+
+// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the message field with the result of the operation.
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
+{	
+	// Notifies users about errors associated with the interface
+	switch (result)
+	{
+		case MFMailComposeResultCancelled:
+		case MFMailComposeResultSaved:
+		case MFMailComposeResultSent:
+		case MFMailComposeResultFailed:
+		default:
+			break;
+	}
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+
+
+-(IBAction)onFollow {
+    
+    BOOL twitter = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=aalittle"]];
+    if (twitter) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=aalittle"]];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.twitter.com/aalittle"]];
+    }
+}
+
+
 @end
+

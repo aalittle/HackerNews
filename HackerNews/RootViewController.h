@@ -11,8 +11,9 @@
 #import "PRPWebViewController.h"
 #import "ConfigViewControllerDelegate.h"
 #import "MBProgressHUD.h"
+#import "EGORefreshTableHeaderView.h"
 
-@interface RootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, PRPWebViewControllerDelegate, ConfigViewControllerDelegate, MBProgressHUDDelegate> {
+@interface RootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, PRPWebViewControllerDelegate, ConfigViewControllerDelegate, MBProgressHUDDelegate, EGORefreshTableHeaderDelegate> {
     
     UITableView *myTableView;
     
@@ -20,6 +21,9 @@
     PRPConnection *download;
     NSMutableArray *articles;    
     MBProgressHUD *progressView;
+    
+    BOOL _reloading;
+    EGORefreshTableHeaderView *refreshHeaderView;
 }
 
 @property (nonatomic, retain) UINib *complexCellNib;
@@ -27,5 +31,8 @@
 @property (nonatomic, retain) NSMutableArray *articles;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
 @property (nonatomic, retain) MBProgressHUD *progressView;
+
+@property (nonatomic, retain) EGORefreshTableHeaderView *refreshHeaderView;
+@property (nonatomic, assign) BOOL _reloading;
 
 @end

@@ -14,20 +14,31 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "PRPWebViewControllerDelegate.h"
 
-@interface PRPWebViewController : UIViewController <UIWebViewDelegate> {}
+@interface PRPWebViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {}
 
 @property (nonatomic, retain) NSURL *url;
 
 @property (nonatomic, retain) UIColor *backgroundColor;
-@property (nonatomic, retain) UIWebView *webView;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *back;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *forward;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *refresh;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *action;
 
 @property (nonatomic, assign) BOOL showsDoneButton;
 
 @property (nonatomic, assign) id <PRPWebViewControllerDelegate> delegate;
 
 - (void)reload;
+
+-(IBAction)onBack;
+-(IBAction)onForward;
+-(IBAction)onRefresh;
+-(IBAction)onAction;
 
 @end

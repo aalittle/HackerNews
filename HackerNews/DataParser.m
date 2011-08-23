@@ -25,6 +25,7 @@
     NSDictionary *elements = [parser objectWithString:json_string error:nil];
 
     [json_string release];
+    [parser release];
     
     NSArray *articles = [elements objectForKey:@"results"];
 

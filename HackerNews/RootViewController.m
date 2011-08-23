@@ -6,6 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "NSUserDefaults+PRPAdditions.h"
 #import "RootViewController.h"
 #import "ConfigViewController.h"
 #import "InfoViewController.h"
@@ -19,6 +20,7 @@
 -(void)displayInfoView;
 -(void)displayConfigViewController;
 -(void)networkErrorAlert;
+-(void)doneLoadingData;
 
 @end
 
@@ -29,6 +31,8 @@
 @synthesize download;
 @synthesize articles;
 @synthesize progressView;
+@synthesize refreshHeaderView;
+@synthesize _reloading;
 
 - (void)viewDidUnload
 {
@@ -41,6 +45,7 @@
     self.articles = nil;
     self.myTableView = nil;
     self.progressView = nil;
+    self.refreshHeaderView = nil;
 }
 
 - (void)dealloc
@@ -50,7 +55,7 @@
     [download release], download = nil;
     [articles release], articles = nil;
     [progressView release], progressView = nil;
-
+    [refreshHeaderView release], refreshHeaderView = nil;
     [super dealloc];
 }
 
@@ -58,7 +63,21 @@
 {
     [super viewDidLoad];
 
-    [self saveWith:0.30 commentsBoost:0.15 timeBoost:500.0];
+    if (refreshHeaderView == nil) {
+		
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.myTableView.bounds.size.height, self.view.frame.size.width, self.myTableView.bounds.size.height)];
+		view.delegate = self;
+		[self.myTableView addSubview:view];
+		refreshHeaderView = view;
+		[view release];
+	}
+	
+	//  update the last update date
+	[refreshHeaderView refreshLastUpdatedDate];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [self saveWith:defaults.prp_pointBoost commentsBoost:defaults.prp_commentBoost timeBoost:defaults.prp_freshBoost];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -199,7 +218,7 @@
 {    
     Article *theArticle = [articles objectAtIndex:indexPath.row];
     
-    PRPWebViewController *webView = [[PRPWebViewController alloc] init];
+    PRPWebViewController *webView = [[PRPWebViewController alloc] initWithNibName:@"PRPWebViewController" bundle:nil];
     webView.url = [NSURL URLWithString:theArticle.url];
     webView.showsDoneButton = NO;
     webView.delegate = self;
@@ -245,7 +264,7 @@
 
 -(void)saveWith:(float)pointsBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost {
     
-    //create a progress view indicator
+    //create a progress view indicator 
     if( !progressView ) {
         progressView = [[MBProgressHUD alloc] initWithView:self.view];
         progressView.detailsLabelFont = [UIFont fontWithName:@"Helvetica-Bold" size:16.0];
@@ -255,7 +274,12 @@
     [self.view addSubview:progressView];
     progressView.delegate = self;    
     progressView.labelText = @"Retrieving Articles";    
-    [progressView show:YES];
+    
+    //if we are not already showing a "loading" message due to "pull to refresh"
+    if (!_reloading) {
+        
+        [progressView show:YES];
+    }
 
     
     NSURL *hackerURL = [PRPConnection hackerNewsURLWith:pointsBoost commentsBoost:cBoost timeBoost:tBoost];
@@ -266,6 +290,7 @@
         if (error) {
             
             //handle the error
+            [self doneLoadingData];
             [self.progressView hide:YES];
             [self networkErrorAlert];
             
@@ -275,6 +300,7 @@
             self.articles = [DataParser extractArticlesFrom:connection.downloadData];
             [self.myTableView reloadData];
             [self.progressView hide:YES];
+            [self doneLoadingData];
         }
     };
     
@@ -293,13 +319,63 @@
     UIAlertView *networkIssue = [[UIAlertView alloc] initWithTitle:@"Network Issue" message:@"Sorry, we had trouble retrieving the articles.  Please try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [networkIssue show];
-    
+    [networkIssue release];
 }
 
 #pragma mark MBProgressHUD delegate methods
 
 - (void)hudWasHidden:(MBProgressHUD *)hud {
     NSLog(@"ProgressView was hidden from view.");
+}
+
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)reloadTableViewDataSource{
+	
+    _reloading = YES;
+}
+
+- (void)doneLoadingData{
+	
+	//  model should call this when its done loading
+	[refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.myTableView];	
+    _reloading = NO;
+}
+
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{	
+	
+	[refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	
+	[refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];	
+}
+
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
+	
+    _reloading = YES;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                
+	[self saveWith:defaults.prp_pointBoost commentsBoost:defaults.prp_commentBoost timeBoost:defaults.prp_freshBoost];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
+	
+	return _reloading; // should return if data source model is reloading
+	
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
+	
+	return [NSDate date]; // should return date data source was last changed
+	
 }
 
 @end

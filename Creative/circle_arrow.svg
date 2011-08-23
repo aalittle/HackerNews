@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="140"
+   height="120"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="circle_arrow.svg"
+   inkscape:export-filename="/Users/little/Development/personal/HackerNews_github/HackerNews/Images/circle_arrow.png"
+   inkscape:export-xdpi="44.689999"
+   inkscape:export-ydpi="44.689999">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 30 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="70 : 30 : 1"
+       inkscape:persp3d-origin="35 : 20 : 1"
+       id="perspective3761" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="46.702246"
+     inkscape:cy="34.704133"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:snap-nodes="false"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     showguides="false"
+     inkscape:window-width="1445"
+     inkscape:window-height="815"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3787"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-932.36218)">
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#edede7;stroke-width:4.92689514;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3755"
+       sodipodi:cx="13.75"
+       sodipodi:cy="10.357142"
+       sodipodi:rx="28.928572"
+       sodipodi:ry="28.928572"
+       d="m 42.678572,10.357142 a 28.928572,28.928572 0 1 1 -57.857144,0 28.928572,28.928572 0 1 1 57.857144,0 z"
+       transform="matrix(1.9559374,0,0,1.8805457,43.154585,973.05897)" />
+    <rect
+       style="fill:#edede7;fill-opacity:1;stroke:#edede7;stroke-width:8.58489895;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3779"
+       width="46.664742"
+       height="22.415075"
+       x="60.042812"
+       y="983.6546" />
+    <path
+       sodipodi:type="star"
+       style="fill:#edede7;fill-opacity:1;stroke:#edede7;stroke-width:4.6420002;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3785"
+       sodipodi:sides="3"
+       sodipodi:cx="-39.14341"
+       sodipodi:cy="17.573593"
+       sodipodi:r1="8.9659929"
+       sodipodi:r2="4.4829965"
+       sodipodi:arg1="0"
+       sodipodi:arg2="1.0471976"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0.015"
+       d="m -30.273971,17.510856 -13.287942,7.745189 2.77e-4,-15.5063186 z"
+       transform="matrix(-2.6180121,0,0,-2.6180121,-46.122021,1040.4922)"
+       inkscape:transform-center-x="5.8263471"
+       inkscape:transform-center-y="0.18516629" />
+  </g>
+</svg>
