@@ -163,11 +163,11 @@
 				<reference key="IBUIContentView" ref="961899875"/>
 				<object class="NSCustomResource" key="IBUIImage">
 					<string key="NSClassName">NSImage</string>
-					<string key="NSResourceName">cell_background_lightgrey@2x.png</string>
+					<string key="NSResourceName">cell_background_beige@2x.png</string>
 				</object>
 				<object class="NSCustomResource" key="IBUISelectedImage">
 					<string key="NSClassName">NSImage</string>
-					<string key="NSResourceName">cell_background_blue@2x.png</string>
+					<string key="NSResourceName">cell_background_lightgrey@2x.png</string>
 				</object>
 				<string key="IBUIReuseIdentifier">ArticleTableViewCell</string>
 			</object>
@@ -360,7 +360,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>cell_background_blue@2x.png</string>
+				<string>cell_background_beige@2x.png</string>
 				<string>cell_background_lightgrey@2x.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">

@@ -7,6 +7,7 @@
 //
 
 #import "HackerNewsAppDelegate.h"
+#import "NSUserDefaults+PRPAdditions.h"
 
 @implementation HackerNewsAppDelegate
 
@@ -14,6 +15,11 @@
 @synthesize window=_window;
 
 @synthesize navigationController=_navigationController;
+
++(void)initialize {
+
+    [NSUserDefaults prp_registerDefaults];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

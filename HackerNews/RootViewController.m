@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "ConfigViewController.h"
+#import "InfoViewController.h"
 #import "ArticleTableViewCell.h"
 #import "DataParser.h"
 #import "Article.h"
@@ -16,8 +17,8 @@
 @interface RootViewController ()
 
 -(void)displayInfoView;
--(void)closeInfoView;
 -(void)displayConfigViewController;
+-(void)networkErrorAlert;
 
 @end
 
@@ -27,7 +28,6 @@
 @synthesize complexCellNib;
 @synthesize download;
 @synthesize articles;
-@synthesize infoView;
 @synthesize progressView;
 
 - (void)viewDidUnload
@@ -39,7 +39,6 @@
     self.complexCellNib = nil;
     self.download = nil;
     self.articles = nil;
-    self.infoView = nil;
     self.myTableView = nil;
     self.progressView = nil;
 }
@@ -50,7 +49,6 @@
     [complexCellNib release], complexCellNib = nil;
     [download release], download = nil;
     [articles release], articles = nil;
-    [infoView release], infoView = nil;
     [progressView release], progressView = nil;
 
     [super dealloc];
@@ -60,14 +58,6 @@
 {
     [super viewDidLoad];
 
-    //get the info view prepared for display
-    NSArray* nibViews = [[NSBundle mainBundle] loadNibNamed:@"InfoView"
-                                                      owner:self
-                                                    options:nil];
-    
-    self.infoView = [nibViews objectAtIndex:0];
-
-    
     [self saveWith:0.30 commentsBoost:0.15 timeBoost:500.0];
 }
 
@@ -206,16 +196,14 @@
 */
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self closeInfoView];
-    
+{    
     Article *theArticle = [articles objectAtIndex:indexPath.row];
     
     PRPWebViewController *webView = [[PRPWebViewController alloc] init];
     webView.url = [NSURL URLWithString:theArticle.url];
     webView.showsDoneButton = NO;
     webView.delegate = self;
-    webView.backgroundColor = [UIColor colorWithRed:14.0/255.0 green:101.0/255.0 blue:177.0/255.0 alpha:1.0];
+    webView.backgroundColor = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:231.0/255.0 alpha:1.0];
     
     [self.navigationController pushViewController:webView animated:YES];
     
@@ -233,22 +221,15 @@
 
 -(IBAction)displayInfoView {
     
-    //set the action to close this view
-    UIButton *theButton = (UIButton *)self.navigationItem.leftBarButtonItem.customView;
-    [theButton addTarget:self action:@selector(closeInfoView) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:infoView];
-}
-
--(void)closeInfoView {
+    InfoViewController *viewController = [[InfoViewController alloc] initWithNibName:@"InfoViewController" bundle:nil];
     
-    UIButton *theButton = (UIButton *)self.navigationItem.leftBarButtonItem.customView;
-    [theButton addTarget:self action:@selector(displayInfoView) forControlEvents:UIControlEventTouchUpInside];
-    [infoView removeFromSuperview];
+    viewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentModalViewController:viewController animated:YES];
+    
+    [viewController release];
 }
 
 -(IBAction)displayConfigViewController {
-    
-    [self closeInfoView];
     
     ConfigViewController *viewController = [[ConfigViewController alloc] initWithNibName:@"ConfigViewController" bundle:nil];
     viewController.delegate = self;
@@ -286,6 +267,7 @@
             
             //handle the error
             [self.progressView hide:YES];
+            [self networkErrorAlert];
             
         } else {
             
@@ -303,6 +285,15 @@
     [self.download start]; 
     
     [self dismissModalViewControllerAnimated:YES];
+}
+
+
+-(void)networkErrorAlert {
+    
+    UIAlertView *networkIssue = [[UIAlertView alloc] initWithTitle:@"Network Issue" message:@"Sorry, we had trouble retrieving the articles.  Please try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [networkIssue show];
+    
 }
 
 #pragma mark MBProgressHUD delegate methods

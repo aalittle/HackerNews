@@ -7,10 +7,7 @@
 //
 
 #import "ConfigViewController.h"
-
-#define FRESHNESS_DEFAULT 500.00
-#define POINTS_DEFAULT      0.30      
-#define COMMENTS_DEFAULT    0.15
+#import "NSUserDefaults+PRPAdditions.h"
 
 @implementation ConfigViewController
 
@@ -67,7 +64,12 @@
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)] autorelease];
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save)] autorelease];
     self.navigationItem.title = @"Configure Search";
-
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    self.points.value = defaults.prp_pointBoost; 
+    self.comments.value = defaults.prp_commentBoost;
+    self.freshness.value = defaults.prp_freshBoost;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -93,6 +95,10 @@
     
     if (delegate && [delegate respondsToSelector:@selector(saveWith:commentsBoost:timeBoost:)]) {
 
+        [[NSUserDefaults standardUserDefaults] prp_setCommentBoost:self.comments.value];
+        [[NSUserDefaults standardUserDefaults] prp_setPointBoost:self.points.value];
+        [[NSUserDefaults standardUserDefaults] prp_setFreshBoost:self.freshness.value];
+        
         [delegate saveWith:points.value commentsBoost:comments.value timeBoost:freshness.value];
     }
 }
