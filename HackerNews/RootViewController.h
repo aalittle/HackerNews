@@ -16,6 +16,7 @@
 @interface RootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, PRPWebViewControllerDelegate, ConfigViewControllerDelegate, MBProgressHUDDelegate, EGORefreshTableHeaderDelegate> {
     
     UITableView *myTableView;
+    UIButton *more;
     
     UINib *complexCellNib;
     PRPConnection *download;
@@ -31,6 +32,7 @@
 @property (nonatomic, retain) NSMutableArray *articles;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
 @property (nonatomic, retain) MBProgressHUD *progressView;
+@property (nonatomic, retain) IBOutlet UIButton *more;
 
 @property (nonatomic, retain) EGORefreshTableHeaderView *refreshHeaderView;
 @property (nonatomic, assign) BOOL _reloading;

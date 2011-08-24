@@ -27,6 +27,7 @@ typedef void (^PRPConnectionCompletionBlock)(PRPConnection *connection,
 @interface PRPConnection : NSObject {}
 
 @property (nonatomic, copy, readonly) NSURL *url;
+@property (nonatomic, assign, readonly) NSInteger startIndex; //index of the first article 
 @property (nonatomic, copy, readonly) NSURLRequest *urlRequest;
 @property (nonatomic, assign, readonly) NSInteger contentLength;
 @property (nonatomic, retain, readonly) NSMutableData *downloadData;
@@ -34,23 +35,27 @@ typedef void (^PRPConnectionCompletionBlock)(PRPConnection *connection,
 @property (nonatomic, assign) NSUInteger progressThreshold;
 
 
-+ (NSURL *)hackerNewsURLWith:(float)pointsBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost;
++ (NSURL *)hackerNewsURLWith:(NSInteger)withStartIndex pointsBoost:(float)pBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost;
 
 + (id)connectionWithURL:(NSURL *)requestURL
           progressBlock:(PRPConnectionProgressBlock)progress
-        completionBlock:(PRPConnectionCompletionBlock)completion;
+        completionBlock:(PRPConnectionCompletionBlock)completion
+          theStartIndex:(NSInteger)index;
 
 + (id)connectionWithRequest:(NSURLRequest *)request
               progressBlock:(PRPConnectionProgressBlock)progress
-            completionBlock:(PRPConnectionCompletionBlock)completion;
+            completionBlock:(PRPConnectionCompletionBlock)completion
+            theStartIndex:(NSInteger)index;
 
 - (id)initWithURL:(NSURL *)requestURL
     progressBlock:(PRPConnectionProgressBlock)progress
-  completionBlock:(PRPConnectionCompletionBlock)completion;
+  completionBlock:(PRPConnectionCompletionBlock)completion
+    theStartIndex:(NSInteger)index;
 
 - (id)initWithRequest:(NSURLRequest *)request
         progressBlock:(PRPConnectionProgressBlock)progress
-      completionBlock:(PRPConnectionCompletionBlock)completion;
+      completionBlock:(PRPConnectionCompletionBlock)completion
+        theStartIndex:(NSInteger)index;
 
 - (void)start;
 - (void)stop;

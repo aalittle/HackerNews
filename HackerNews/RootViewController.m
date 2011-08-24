@@ -21,6 +21,7 @@
 -(void)displayConfigViewController;
 -(void)networkErrorAlert;
 -(void)doneLoadingData;
+-(void)requestNews:(NSInteger)withStartIndex pointsBoost:(float)pBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost;
 
 @end
 
@@ -33,6 +34,7 @@
 @synthesize progressView;
 @synthesize refreshHeaderView;
 @synthesize _reloading;
+@synthesize more;
 
 - (void)viewDidUnload
 {
@@ -46,6 +48,7 @@
     self.myTableView = nil;
     self.progressView = nil;
     self.refreshHeaderView = nil;
+    self.more = nil;
 }
 
 - (void)dealloc
@@ -56,6 +59,8 @@
     [articles release], articles = nil;
     [progressView release], progressView = nil;
     [refreshHeaderView release], refreshHeaderView = nil;
+    [more release], more = nil;
+    
     [super dealloc];
 }
 
@@ -77,7 +82,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [self saveWith:defaults.prp_pointBoost commentsBoost:defaults.prp_commentBoost timeBoost:defaults.prp_freshBoost];
+    [self requestNews:0 pointsBoost:defaults.prp_pointBoost commentsBoost:defaults.prp_commentBoost timeBoost:defaults.prp_freshBoost];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -264,14 +269,37 @@
 
 -(void)saveWith:(float)pointsBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost {
     
+    //get a fresh set of articles
+    [self requestNews:0 pointsBoost:pointsBoost commentsBoost:cBoost timeBoost:tBoost];
+    
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
+-(IBAction)onRequestMoreNews {
+    
+    NSInteger theStartIndex = 0;
+    
+    if ([articles count] > 0) {
+        
+        theStartIndex = [articles count];
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [self requestNews:theStartIndex pointsBoost:defaults.prp_pointBoost commentsBoost:defaults.prp_commentBoost timeBoost:defaults.prp_freshBoost];
+}
+
+-(void)requestNews:(NSInteger)withStartIndex pointsBoost:(float)pBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost {
+    
     //create a progress view indicator 
     if( !progressView ) {
-        progressView = [[MBProgressHUD alloc] initWithView:self.view];
+        progressView = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
         progressView.detailsLabelFont = [UIFont fontWithName:@"Helvetica-Bold" size:16.0];
     }
     // Add progressView to screen
     NSLog(@"ProgressView was added to the view");
-    [self.view addSubview:progressView];
+    [self.navigationController.view addSubview:progressView];
     progressView.delegate = self;    
     progressView.labelText = @"Retrieving Articles";    
     
@@ -280,9 +308,9 @@
         
         [progressView show:YES];
     }
-
     
-    NSURL *hackerURL = [PRPConnection hackerNewsURLWith:pointsBoost commentsBoost:cBoost timeBoost:tBoost];
+    
+    NSURL *hackerURL = [PRPConnection hackerNewsURLWith:withStartIndex  pointsBoost:pBoost commentsBoost:cBoost timeBoost:tBoost];
     
     NSLog(@"%@", [hackerURL description]);
     PRPConnectionProgressBlock progress = ^(PRPConnection *connection) {};
@@ -297,20 +325,32 @@
         } else {
             
             //time to parse the data
-            self.articles = [DataParser extractArticlesFrom:connection.downloadData];
+            if (connection.startIndex == 0) {
+                
+                self.articles = [DataParser extractArticlesFrom:connection.downloadData];
+            }
+            else {
+                
+                //append to existing articles
+                [self.articles addObjectsFromArray:(NSArray *)[DataParser extractArticlesFrom:connection.downloadData]];
+            }
+            
             [self.myTableView reloadData];
             [self.progressView hide:YES];
             [self doneLoadingData];
+            
+            //add the More button to the table footer
+            self.myTableView.tableFooterView = self.more;
+            self.more.hidden = NO;
         }
     };
     
     self.download = [PRPConnection connectionWithURL:hackerURL
                                        progressBlock:progress
-                                     completionBlock:complete];
+                                     completionBlock:complete
+                                        theStartIndex:withStartIndex];
     self.download.progressThreshold = 5;
     [self.download start]; 
-    
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 
@@ -363,7 +403,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                                 
-	[self saveWith:defaults.prp_pointBoost commentsBoost:defaults.prp_commentBoost timeBoost:defaults.prp_freshBoost];
+	[self requestNews:0 pointsBoost:defaults.prp_pointBoost commentsBoost:defaults.prp_commentBoost timeBoost:defaults.prp_freshBoost];
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{

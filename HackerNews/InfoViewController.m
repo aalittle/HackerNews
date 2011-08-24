@@ -8,14 +8,21 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "InfoViewController.h"
+#import "PRPWebViewController.h"
 
+@interface InfoViewController (PrivateMethods)
+
+-(void)launchWebView:(NSString *)urlAsString;
+
+@end
 
 @implementation InfoViewController
 
 @synthesize backButton;
 @synthesize follow;
 @synthesize email;
-@synthesize gradientBar;
+@synthesize credits;
+@synthesize creditsView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,7 +38,8 @@
     [backButton release], backButton = nil;
     [follow release], follow = nil;
     [email release], email = nil;
-    [gradientBar release], gradientBar = nil;
+    [credits release], credits = nil;
+    [creditsView release], creditsView = nil;
     
     [super dealloc];
 }
@@ -55,9 +63,12 @@
 
     self.follow.layer.borderColor = [UIColor grayColor].CGColor;
     self.follow.layer.borderWidth = 1.0f;
-    
-    self.gradientBar.layer.borderColor = [UIColor grayColor].CGColor;
-    self.gradientBar.layer.borderWidth = 1.0f;
+
+    self.credits.layer.borderColor = [UIColor grayColor].CGColor;
+    self.credits.layer.borderWidth = 1.0f;
+
+    self.creditsView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.creditsView.layer.borderWidth = 2.0f;
 }
 
 - (void)viewDidUnload
@@ -68,7 +79,8 @@
     self.backButton = nil;
     self.follow = nil;
     self.email = nil;
-    self.gradientBar = nil;
+    self.credits = nil;
+    self.creditsView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -129,6 +141,101 @@
     }
 }
 
+-(IBAction)onCredits {
+    
+    CGRect newFrame;
+    
+    //only move the credits screen into view, if it is off the view
+    if (self.creditsView.frame.origin.y > self.creditsView.frame.size.height) {
+     
+        newFrame = CGRectMake(self.creditsView.frame.origin.x, self.creditsView.frame.origin.y-self.creditsView.frame.size.height, self.creditsView.frame.size.width, self.creditsView.frame.size.height);
+    }
+    else {
+            
+        newFrame = CGRectMake(self.creditsView.frame.origin.x, self.creditsView.frame.origin.y+self.creditsView.frame.size.height, self.creditsView.frame.size.width, self.creditsView.frame.size.height);            
+    }
+    
+    [UIView animateWithDuration:0.5
+                            delay:0 
+                            options:UIViewAnimationCurveEaseIn
+                         animations:^{
+                             self.creditsView.frame = newFrame;
+                         }
+                         completion:^( BOOL finished ) {
+                         }];
+}
+
+
+#pragma Credit View button handling
+
+-(IBAction)onDismiss {
+    
+    CGRect newFrame;
+    
+    //only move the credits screen into view, if it is off the view
+    if (self.creditsView.frame.origin.y < self.creditsView.frame.size.height) {
+        
+        newFrame = CGRectMake(self.creditsView.frame.origin.x, self.creditsView.frame.origin.y+self.creditsView.frame.size.height, self.creditsView.frame.size.width, self.creditsView.frame.size.height);
+        
+        [UIView animateWithDuration:0.5
+                              delay:0 
+                            options:UIViewAnimationCurveEaseIn
+                         animations:^{
+                             self.creditsView.frame = newFrame;
+                         }
+                         completion:^( BOOL finished ) {
+                         }];
+    }
+
+}
+
+
+-(IBAction)onCell1 {
+    
+    [self launchWebView:@"http://pragprog.com/book/cdirec/ios-recipes"];
+}
+
+-(IBAction)onCell2 {
+
+    [self launchWebView:@"http://twitter.com/#!/lorenb"];
+}
+
+-(IBAction)onCell3 {
+  
+    [self launchWebView:@"http://glyphish.com/"];
+}
+
+-(IBAction)onCell4 {
+  
+    [self launchWebView:@"https://github.com/jdg/MBProgressHUD"];
+}
+
+-(IBAction)onCell5 {
+   
+    [self launchWebView:@"https://github.com/stig/json-framework"];
+}
+
+-(IBAction)onCell6 {
+   
+    [self launchWebView:@"https://github.com/enormego/EGOTableViewPullRefresh"];
+}
+
+-(void)launchWebView:(NSString *)urlAsString {
+ 
+    PRPWebViewController *webView = [[PRPWebViewController alloc] initWithNibName:@"PRPWebViewController" bundle:nil];
+    webView.url = [NSURL URLWithString:urlAsString];
+    webView.showsDoneButton = YES;
+    webView.delegate = self;
+    webView.backgroundColor = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:231.0/255.0 alpha:1.0];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
+    navController.navigationBar.tintColor = [UIColor colorWithRed:249.0/255.0 green:82.0/255.0 blue:0.0 alpha:1.0];
+    
+    [self presentModalViewController:navController animated:YES];
+
+    [navController release];
+    [webView release];
+}
 
 @end
 

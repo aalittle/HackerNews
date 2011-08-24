@@ -44,6 +44,7 @@
 
 @synthesize progressBlock;
 @synthesize completionBlock;
+@synthesize startIndex;
 
 - (void)dealloc {
     [url release], url = nil;
@@ -56,9 +57,9 @@
     [super dealloc];
 }
 
-+ (NSURL *)hackerNewsURLWith:(float)pointsBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost {
++ (NSURL *)hackerNewsURLWith:(NSInteger)withStartIndex pointsBoost:(float)pBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost {
     
-    NSURL *theURL = [[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://api.thriftdb.com/api.hnsearch.com/items/_search?q=submission&limit=30&weights[title]=0.0&weights[text]=0.0&weights[domain]=0.0&weights[username]=0.0&weights[type]=2.0&boosts[fields][points]=%f&boosts[fields][num_comments]=%f&boosts[functions][pow(2,div(div(ms(create_ts,NOW),3600000),72))]=%f&pretty_print=true", pointsBoost, cBoost, tBoost]] autorelease];
+    NSURL *theURL = [[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://api.thriftdb.com/api.hnsearch.com/items/_search?q=submission&start=%d&limit=30&weights[title]=0.0&weights[text]=0.0&weights[domain]=0.0&weights[username]=0.0&weights[type]=2.0&boosts[fields][points]=%f&boosts[fields][num_comments]=%f&boosts[functions][pow(2,div(div(ms(create_ts,NOW),3600000),72))]=%f&pretty_print=true", withStartIndex, pBoost, cBoost, tBoost]] autorelease];
     
     return theURL;
 }
@@ -66,39 +67,47 @@
 
 + (id)connectionWithRequest:(NSURLRequest *)request
               progressBlock:(PRPConnectionProgressBlock)progress
-            completionBlock:(PRPConnectionCompletionBlock)completion {
+            completionBlock:(PRPConnectionCompletionBlock)completion
+            theStartIndex:(NSInteger)index {
     return [[[self alloc] initWithRequest:request
                             progressBlock:progress
-                          completionBlock:completion]
+                          completionBlock:completion
+                            theStartIndex:index]
             autorelease];
 }
 
 + (id)connectionWithURL:(NSURL *)downloadURL
           progressBlock:(PRPConnectionProgressBlock)progress
-        completionBlock:(PRPConnectionCompletionBlock)completion {
+        completionBlock:(PRPConnectionCompletionBlock)completion
+        theStartIndex:(NSInteger)index {
     return [[[self alloc] initWithURL:downloadURL
                         progressBlock:progress
-                      completionBlock:completion] 
+                      completionBlock:completion
+                        theStartIndex:index] 
             autorelease];
 }
 
 - (id)initWithURL:(NSURL *)requestURL
     progressBlock:(PRPConnectionProgressBlock)progress
-  completionBlock:(PRPConnectionCompletionBlock)completion {
+  completionBlock:(PRPConnectionCompletionBlock)completion
+    theStartIndex:(NSInteger)index {
     return [self initWithRequest:[NSURLRequest requestWithURL:requestURL]
                    progressBlock:progress
-                 completionBlock:completion];
+                 completionBlock:completion
+                    theStartIndex:index];
 }
 
 - (id)initWithRequest:(NSURLRequest *)request
         progressBlock:(PRPConnectionProgressBlock)progress 
-      completionBlock:(PRPConnectionCompletionBlock)completion {
+      completionBlock:(PRPConnectionCompletionBlock)completion
+        theStartIndex:(NSInteger)index {
     if ((self = [super init])) {
         urlRequest = [request copy];
         progressBlock = [progress copy];
         completionBlock = [completion copy];
         url = [[request URL] copy];
         progressThreshold = 1.0;
+        startIndex = index;
     }
     return self;
 }
