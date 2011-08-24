@@ -222,7 +222,7 @@ const float PRPWebViewControllerFadeDuration = 0.5;
 
 -(IBAction)onAction {
  
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[self.url description] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open in Safari", @"Mail Link", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[self.url description] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open in Safari", @"Mail Link", @"Copy Link", nil];
     
     [sheet showInView:self.view];
 }
@@ -302,6 +302,11 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     else if (buttonIndex == 1) {
         
         [self emailLink];
+    }
+    else if (buttonIndex == 2) {
+        
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = [self.url description];
     }
     
 }

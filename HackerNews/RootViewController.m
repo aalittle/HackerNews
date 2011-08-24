@@ -223,15 +223,25 @@
 {    
     Article *theArticle = [articles objectAtIndex:indexPath.row];
     
-    PRPWebViewController *webView = [[PRPWebViewController alloc] initWithNibName:@"PRPWebViewController" bundle:nil];
-    webView.url = [NSURL URLWithString:theArticle.url];
-    webView.showsDoneButton = NO;
-    webView.delegate = self;
-    webView.backgroundColor = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:231.0/255.0 alpha:1.0];
-    
-    [self.navigationController pushViewController:webView animated:YES];
-    
-    [webView release];
+    if ( theArticle.url == nil || [theArticle.url length] == 0) {
+        
+        UIAlertView *linkIssue = [[UIAlertView alloc] initWithTitle:@"Missing Link" message:@"Sorry, the link to this article is missing.  Please try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [linkIssue show];
+        [linkIssue release];
+    }
+    else {
+
+        PRPWebViewController *webView = [[PRPWebViewController alloc] initWithNibName:@"PRPWebViewController" bundle:nil];
+        webView.url = [NSURL URLWithString:theArticle.url];
+        webView.showsDoneButton = NO;
+        webView.delegate = self;
+        webView.backgroundColor = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:231.0/255.0 alpha:1.0];
+        
+        [self.navigationController pushViewController:webView animated:YES];
+        
+        [webView release];
+    }
 }
 
 - (void)didReceiveMemoryWarning

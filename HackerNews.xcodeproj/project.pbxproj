@@ -30,7 +30,6 @@
 		772D08F2140428A4000B9ADB /* HN_splash_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 772D08EE140428A3000B9ADB /* HN_splash_screen.png */; };
 		772D08F3140428A4000B9ADB /* HN_splash_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 772D08EF140428A3000B9ADB /* HN_splash_screen@2x.png */; };
 		772D08F4140428A4000B9ADB /* right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 772D08F0140428A3000B9ADB /* right_arrow.png */; };
-		772D08F5140428A4000B9ADB /* right_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 772D08F1140428A4000B9ADB /* right_arrow@2x.png */; };
 		772D08F714042904000B9ADB /* left_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 772D08F614042904000B9ADB /* left_arrow.png */; };
 		772D090114044104000B9ADB /* AttributionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 772D090014044104000B9ADB /* AttributionView.xib */; };
 		772D090414048BA9000B9ADB /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 772D090214048BA9000B9ADB /* Arrow.png */; };
@@ -49,6 +48,8 @@
 		7756911D1403147500D9C983 /* cell_background_beige@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7756911B1403147500D9C983 /* cell_background_beige@2x.png */; };
 		775691211403205D00D9C983 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7756911F1403205B00D9C983 /* InfoViewController.m */; };
 		775691221403205D00D9C983 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775691201403205C00D9C983 /* InfoViewController.xib */; };
+		7774CE8014054A27003FD650 /* left_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7774CE7E14054A27003FD650 /* left_arrow@2x.png */; };
+		7774CE8114054A27003FD650 /* right_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7774CE7F14054A27003FD650 /* right_arrow@2x.png */; };
 		7786E80613FDBCAC00BD2093 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7786E80513FDBCAC00BD2093 /* UIKit.framework */; };
 		7786E80813FDBCAC00BD2093 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7786E80713FDBCAC00BD2093 /* Foundation.framework */; };
 		7786E80A13FDBCAC00BD2093 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7786E80913FDBCAC00BD2093 /* CoreGraphics.framework */; };
@@ -123,7 +124,6 @@
 		772D08EE140428A3000B9ADB /* HN_splash_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HN_splash_screen.png; sourceTree = "<group>"; };
 		772D08EF140428A3000B9ADB /* HN_splash_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HN_splash_screen@2x.png"; sourceTree = "<group>"; };
 		772D08F0140428A3000B9ADB /* right_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_arrow.png; sourceTree = "<group>"; };
-		772D08F1140428A4000B9ADB /* right_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_arrow@2x.png"; sourceTree = "<group>"; };
 		772D08F614042904000B9ADB /* left_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_arrow.png; sourceTree = "<group>"; };
 		772D090014044104000B9ADB /* AttributionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttributionView.xib; sourceTree = "<group>"; };
 		772D090214048BA9000B9ADB /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = "<group>"; };
@@ -145,7 +145,9 @@
 		7756911E1403205A00D9C983 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		7756911F1403205B00D9C983 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		775691201403205C00D9C983 /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
-		7786E80113FDBCAC00BD2093 /* HackerNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7774CE7E14054A27003FD650 /* left_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_arrow@2x.png"; sourceTree = "<group>"; };
+		7774CE7F14054A27003FD650 /* right_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_arrow@2x.png"; sourceTree = "<group>"; };
+		7786E80113FDBCAC00BD2093 /* Little Hack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Little Hack.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7786E80513FDBCAC00BD2093 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7786E80713FDBCAC00BD2093 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7786E80913FDBCAC00BD2093 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -279,7 +281,7 @@
 		7786E80213FDBCAC00BD2093 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7786E80113FDBCAC00BD2093 /* HackerNews.app */,
+				7786E80113FDBCAC00BD2093 /* Little Hack.app */,
 				7786E82513FDBCAC00BD2093 /* HackerNewsTests.octest */,
 			);
 			name = Products;
@@ -439,13 +441,14 @@
 		7786E8BD13FEB55600BD2093 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7774CE7E14054A27003FD650 /* left_arrow@2x.png */,
+				7774CE7F14054A27003FD650 /* right_arrow@2x.png */,
 				772D090214048BA9000B9ADB /* Arrow.png */,
 				772D090314048BA9000B9ADB /* Arrow@2x.png */,
 				772D08F614042904000B9ADB /* left_arrow.png */,
 				772D08EE140428A3000B9ADB /* HN_splash_screen.png */,
 				772D08EF140428A3000B9ADB /* HN_splash_screen@2x.png */,
 				772D08F0140428A3000B9ADB /* right_arrow.png */,
-				772D08F1140428A4000B9ADB /* right_arrow@2x.png */,
 				772D08E814041C9F000B9ADB /* andrew_scenic.png */,
 				772D08DE1403F4D6000B9ADB /* gradient_bar.png */,
 				772D08DF1403F4D6000B9ADB /* gradient_bar@2x.png */,
@@ -482,7 +485,7 @@
 			);
 			name = HackerNews;
 			productName = HackerNews;
-			productReference = 7786E80113FDBCAC00BD2093 /* HackerNews.app */;
+			productReference = 7786E80113FDBCAC00BD2093 /* Little Hack.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7786E82413FDBCAC00BD2093 /* HackerNewsTests */ = {
@@ -569,11 +572,12 @@
 				772D08F2140428A4000B9ADB /* HN_splash_screen.png in Resources */,
 				772D08F3140428A4000B9ADB /* HN_splash_screen@2x.png in Resources */,
 				772D08F4140428A4000B9ADB /* right_arrow.png in Resources */,
-				772D08F5140428A4000B9ADB /* right_arrow@2x.png in Resources */,
 				772D08F714042904000B9ADB /* left_arrow.png in Resources */,
 				772D090114044104000B9ADB /* AttributionView.xib in Resources */,
 				772D090414048BA9000B9ADB /* Arrow.png in Resources */,
 				772D090514048BA9000B9ADB /* Arrow@2x.png in Resources */,
+				7774CE8014054A27003FD650 /* left_arrow@2x.png in Resources */,
+				7774CE8114054A27003FD650 /* right_arrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,7 +740,7 @@
 				GCC_PREFIX_HEADER = "HackerNews/HackerNews-Prefix.pch";
 				INFOPLIST_FILE = "HackerNews/HackerNews-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Little Hack";
 				PROVISIONING_PROFILE = "5FF602E5-60A3-47EE-ADBE-823286CEE484";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5FF602E5-60A3-47EE-ADBE-823286CEE484";
 				WRAPPER_EXTENSION = app;
@@ -754,7 +758,7 @@
 				GCC_PREFIX_HEADER = "HackerNews/HackerNews-Prefix.pch";
 				INFOPLIST_FILE = "HackerNews/HackerNews-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Little Hack";
 				PROVISIONING_PROFILE = "5FF602E5-60A3-47EE-ADBE-823286CEE484";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5FF602E5-60A3-47EE-ADBE-823286CEE484";
 				VALIDATE_PRODUCT = YES;

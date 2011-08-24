@@ -62,7 +62,7 @@
         articleObject.username = ( [articleDetail objectForKey:@"username"] == [NSNull null] ) ? nil : [articleDetail objectForKey:@"username"];
         
         //add the new article object to the array, but only if the article has a title
-        if ([articleObject.title length] > 0) {
+        if ([articleObject.title length] > 0 ) {
 
             [articleObjects addObject:articleObject];
         }
