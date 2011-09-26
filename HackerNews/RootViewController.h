@@ -18,7 +18,6 @@
     UITableView *myTableView;
     UIButton *more;
     
-    UINib *complexCellNib;
     PRPConnection *download;
     NSMutableArray *articles;    
     MBProgressHUD *progressView;
@@ -27,7 +26,6 @@
     EGORefreshTableHeaderView *refreshHeaderView;
 }
 
-@property (nonatomic, retain) UINib *complexCellNib;
 @property (nonatomic, retain) PRPConnection *download;
 @property (nonatomic, retain) NSMutableArray *articles;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;

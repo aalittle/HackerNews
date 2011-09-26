@@ -6,6 +6,8 @@
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>${PRODUCT_NAME}</string>
+	<key>CFBundleDocumentTypes</key>
+	<array/>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -13,12 +15,11 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>hacker_news_logo.png</string>
-		<string>icon.png</string>
 		<string>hacker_news_logo@2x.png</string>
 		<string>hacker_news_logo@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.littleapps.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.littleapps.littlehack</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -26,11 +27,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array/>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
@@ -38,6 +41,10 @@
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
+	<array/>
+	<key>UTExportedTypeDeclarations</key>
+	<array/>
+	<key>UTImportedTypeDeclarations</key>
 	<array/>
 </dict>
 </plist>

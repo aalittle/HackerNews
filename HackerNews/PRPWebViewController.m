@@ -14,6 +14,7 @@
 //
 
 #import "PRPWebViewController.h"
+#import "TestFlight.h"
 
 const float PRPWebViewControllerFadeDuration = 0.5;
 
@@ -268,6 +269,15 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     
 	[self presentModalViewController:mailController animated:YES];
     [mailController release];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Relinquish ownership any cached data, images, etc that aren't in use.
+    [TestFlight passCheckpoint:@"PRPWebViewController::didReceiveMemoryWarning"];
 }
 
 #pragma MFMailComposer delegate

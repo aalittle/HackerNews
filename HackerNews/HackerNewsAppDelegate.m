@@ -8,6 +8,7 @@
 
 #import "HackerNewsAppDelegate.h"
 #import "NSUserDefaults+PRPAdditions.h"
+#import "TestFlight.h"
 
 @implementation HackerNewsAppDelegate
 
@@ -27,6 +28,9 @@
     // Add the navigation controller's view to the window and display.
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
+    
+    [TestFlight takeOff:@"1ac85ae87ea3aaef7a5c942515bc45cd_MTQwNDIwMTEtMDgtMjYgMTY6MDk6MTYuMjEwOTk2"];
+    
     return YES;
 }
 

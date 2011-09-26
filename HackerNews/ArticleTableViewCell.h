@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PRPNibBasedTableViewCell.h"
 
-@interface ArticleTableViewCell : PRPNibBasedTableViewCell {
+@interface ArticleTableViewCell : UITableViewCell {
     
     UILabel *labelTitle;
     UILabel *labelSubtitle;
@@ -20,5 +20,6 @@
 @property (nonatomic, retain) IBOutlet UILabel *labelSubtitle;
 @property (nonatomic, retain) IBOutlet UILabel *labelSinceCreated;
 
+-(void)redisplay;
 
 @end

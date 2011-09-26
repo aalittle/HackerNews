@@ -14,6 +14,9 @@
 #import "DataParser.h"
 #import "Article.h"
 #import "DateHelper.h"
+#import "TestFlight.h"
+
+#define ROW_HEIGHT 73.0
 
 @interface RootViewController ()
 
@@ -28,7 +31,6 @@
 @implementation RootViewController
 
 @synthesize myTableView;
-@synthesize complexCellNib;
 @synthesize download;
 @synthesize articles;
 @synthesize progressView;
@@ -41,8 +43,6 @@
     [super viewDidUnload];
     
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
-    self.complexCellNib = nil;
     self.download = nil;
     self.articles = nil;
     self.myTableView = nil;
@@ -54,7 +54,6 @@
 - (void)dealloc
 {
     [myTableView release], myTableView = nil;
-    [complexCellNib release], complexCellNib = nil;
     [download release], download = nil;
     [articles release], articles = nil;
     [progressView release], progressView = nil;
@@ -128,18 +127,21 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ArticleTableViewCell *cell = [ArticleTableViewCell cellForTableView:tableView
-                                                                fromNib:self.complexCellNib];
-    
-    
-    return cell.frame.size.height;
+    return ROW_HEIGHT;
 }
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ArticleTableViewCell *cell = [ArticleTableViewCell cellForTableView:tableView
-                                                                      fromNib:self.complexCellNib];
+    static NSString *CellIdentifier = @"ArticleCell";
+    
+	ArticleTableViewCell *cell = (ArticleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	
+	if (cell == nil) {
+		cell = [[[ArticleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		cell.frame = CGRectMake(0.0, 0.0, 320.0, ROW_HEIGHT);
+	}
+    
     // Configure the cell.
     Article *theArticle = [articles objectAtIndex:indexPath.row];
     cell.labelTitle.text = theArticle.title;
@@ -167,57 +169,11 @@
     }
     
     [theSubtitle release];
-                              
+    
+    [cell redisplay];
+
     return cell;
 }
-
-- (UINib *)complexCellNib {
-    if (complexCellNib == nil) {
-        self.complexCellNib = [ArticleTableViewCell nib];
-    }
-    return complexCellNib;    
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert)
-    {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {    
@@ -250,6 +206,7 @@
     [super didReceiveMemoryWarning];
     
     // Relinquish ownership any cached data, images, etc that aren't in use.
+    [TestFlight passCheckpoint:@"RootViewController::didReceiveMemoryWarning"];
 }
 
 
