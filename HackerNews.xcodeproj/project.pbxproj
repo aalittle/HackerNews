@@ -781,7 +781,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Little (ARHN4M8PM5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Little (ARHN4M8PM5)";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HackerNews/HackerNews-Prefix.pch";
 				INFOPLIST_FILE = "HackerNews/HackerNews-Info.plist";

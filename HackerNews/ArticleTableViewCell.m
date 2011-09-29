@@ -64,7 +64,8 @@
         self.labelSinceCreated.minimumFontSize = 10.0;
         self.labelSinceCreated.lineBreakMode = UILineBreakModeTailTruncation;
         self.labelSinceCreated.backgroundColor = [UIColor clearColor];
-
+        self.labelSinceCreated.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+        
         [self.contentView addSubview:labelSinceCreated];
 
     }
