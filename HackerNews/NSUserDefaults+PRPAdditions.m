@@ -33,11 +33,15 @@ NSString *const PRPDefaultsKeyComment = @"prp_commentBoost";
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
-- (float)prp_freshBoost {
+- (float)prp_freshBoost {    
     return [self floatForKey:PRPDefaultsKeyFresh];
 }
 
 - (void)prp_setFreshBoost:(float)freshBoost {
+    
+    //save to iCloud first
+    [[NSUbiquitousKeyValueStore defaultStore] setDouble:(double)freshBoost forKey:PRPDefaultsKeyFresh];
+    
     [self setFloat:freshBoost forKey:PRPDefaultsKeyFresh];
 }
 
@@ -47,6 +51,10 @@ NSString *const PRPDefaultsKeyComment = @"prp_commentBoost";
 }
 
 - (void)prp_setPointBoost:(float)pointBoost {
+    
+    //save to iCloud first
+    [[NSUbiquitousKeyValueStore defaultStore] setDouble:(double)pointBoost forKey:PRPDefaultsKeyPoint];
+
     [self setFloat:pointBoost forKey:PRPDefaultsKeyPoint];
 }
 
@@ -56,6 +64,10 @@ NSString *const PRPDefaultsKeyComment = @"prp_commentBoost";
 }
 
 - (void)prp_setCommentBoost:(float)commentBoost {
+    
+    //save to iCloud first
+    [[NSUbiquitousKeyValueStore defaultStore] setDouble:(double)commentBoost forKey:PRPDefaultsKeyComment];
+
     [self setFloat:commentBoost forKey:PRPDefaultsKeyComment];
 }
 

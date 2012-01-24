@@ -16,10 +16,12 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "PRPWebViewControllerDelegate.h"
+#import "EasyTracker.h"
 
-@interface PRPWebViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {}
+@interface PRPWebViewController : TrackedUIViewController <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {}
 
 @property (nonatomic, retain) NSURL *url;
+@property (nonatomic, retain) NSString *articleID;
 
 @property (nonatomic, retain) UIColor *backgroundColor;
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
@@ -29,6 +31,9 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *forward;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *refresh;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *action;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *comments;
+
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 
 @property (nonatomic, assign) BOOL showsDoneButton;
 
@@ -40,5 +45,6 @@
 -(IBAction)onForward;
 -(IBAction)onRefresh;
 -(IBAction)onAction;
+-(IBAction)onComments;
 
 @end

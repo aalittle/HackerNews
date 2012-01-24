@@ -26,17 +26,17 @@
     //if under an hour has passed
     else if( secondsSince < 3600 ) {
         
-        theTimeSince = [NSString stringWithFormat:@"%d mins", secondsSince / 60];
+        theTimeSince = [NSString stringWithFormat:@"%d m", secondsSince / 60];
     }
     //if under a day has passed
     else if( secondsSince < 86400 ) {
         
-        theTimeSince = [NSString stringWithFormat:@"%d hours", secondsSince / 3600];
+        theTimeSince = [NSString stringWithFormat:@"%d h", secondsSince / 3600];
     }
     //display the number of days
     else {
         
-        theTimeSince = [NSString stringWithFormat:@"%d days", secondsSince / 86400];
+        theTimeSince = [NSString stringWithFormat:@"%d d", secondsSince / 86400];
     }
     
     return theTimeSince;

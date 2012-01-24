@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ConfigViewControllerDelegate.h"
+#import "EasyTracker.h"
 
-
-@interface ConfigViewController : UIViewController {
+@interface ConfigViewController : TrackedUIViewController {
    
     UISlider *freshness;
     UISlider *points;

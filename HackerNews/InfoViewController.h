@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "PRPWebViewControllerDelegate.h"
-@interface InfoViewController : UIViewController <MFMailComposeViewControllerDelegate, PRPWebViewControllerDelegate> {
+#import "EasyTracker.h"
+
+@interface InfoViewController : TrackedUIViewController <MFMailComposeViewControllerDelegate, PRPWebViewControllerDelegate> {
  
     UIButton *backButton;
     

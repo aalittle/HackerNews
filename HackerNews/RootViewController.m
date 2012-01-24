@@ -15,6 +15,7 @@
 #import "Article.h"
 #import "DateHelper.h"
 #import "TestFlight.h"
+#import "SDURLCache.h"
 
 #define ROW_HEIGHT 73.0
 
@@ -25,7 +26,6 @@
 -(void)networkErrorAlert;
 -(void)doneLoadingData;
 -(void)requestNews:(NSInteger)withStartIndex pointsBoost:(float)pBoost commentsBoost:(float)cBoost timeBoost:(float)tBoost;
-
 @end
 
 @implementation RootViewController
@@ -37,6 +37,8 @@
 @synthesize refreshHeaderView;
 @synthesize _reloading;
 @synthesize more;
+@synthesize bannerView;
+@synthesize footerView;
 
 - (void)viewDidUnload
 {
@@ -49,6 +51,7 @@
     self.progressView = nil;
     self.refreshHeaderView = nil;
     self.more = nil;
+    self.footerView = nil;
 }
 
 - (void)dealloc
@@ -59,6 +62,9 @@
     [progressView release], progressView = nil;
     [refreshHeaderView release], refreshHeaderView = nil;
     [more release], more = nil;
+    bannerView.delegate = nil;
+    [bannerView release], bannerView = nil;
+    [footerView release], footerView = nil;
     
     [super dealloc];
 }
@@ -66,7 +72,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    /*
+    //Let's override the shared cache so that data is stored to disk, instead of being held in memory
+    SDURLCache *urlCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024   // 1MB mem cache
+                                                         diskCapacity:1024*1024*5 // 5MB disk cache
+                                                             diskPath:[SDURLCache defaultCachePath]];
+    [NSURLCache setSharedURLCache:urlCache];
+    [urlCache release];
+    */
+    
     if (refreshHeaderView == nil) {
 		
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.myTableView.bounds.size.height, self.view.frame.size.width, self.myTableView.bounds.size.height)];
@@ -81,12 +96,41 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [self requestNews:0 pointsBoost:defaults.prp_pointBoost commentsBoost:defaults.prp_commentBoost timeBoost:defaults.prp_freshBoost];
+    UIImageView *backImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_full"]];
+    
+    self.myTableView.backgroundView = backImage; 
+    self.bannerView.delegate = self;
+    self.bannerView.alpha = 0.0;
+    
+    [backImage release];
+    
+    self.navigationItem.backBarButtonItem =
+    [[[UIBarButtonItem alloc] initWithTitle:@"Custom Title"
+                                      style:UIBarButtonItemStyleBordered
+                                     target:nil
+                                     action:nil] autorelease];
+
+    
+    [self requestNews:0 pointsBoost:defaults.prp_pointBoost commentsBoost:defaults.prp_commentBoost timeBoost:defaults.prp_freshBoost];    
+    
+    CGRect frame = self.myTableView.frame;
+    NSLog(@"start: x %f y %f w %f h %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+    NSDictionary *attr = [[NSDictionary alloc] initWithObjectsAndKeys:font, UITextAttributeFont, nil];
+    [self.navigationController.navigationBar setTitleTextAttributes:attr];
+    [attr release];
+    
+    //set vertical positioning of the title
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0.0 forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0.0 forBarMetrics:UIBarMetricsLandscapePhone];
+    
+    self.navigationItem.backBarButtonItem.title = @"Back";
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -112,7 +156,6 @@
 	// Return YES for all orientations.
 	return YES;
 }
-
 
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -160,6 +203,21 @@
         
         [theSubtitle appendFormat:@" (via %@)", theArticle.domain];
     }
+    if (theArticle.num_comments != nil) {
+        
+        NSInteger commentCount = [theArticle.num_comments intValue];
+        NSLog(@"comments: %d", commentCount);
+        
+        if(commentCount > 99){
+            
+            cell.labelComments.text = @"99+";
+        }
+        else {
+         
+            cell.labelComments.text = [NSString stringWithFormat:@"%d", commentCount];
+        }
+    }
+    
     
     cell.labelSubtitle.text = theSubtitle;
     
@@ -179,25 +237,26 @@
 {    
     Article *theArticle = [articles objectAtIndex:indexPath.row];
     
+    PRPWebViewController *webView = [[PRPWebViewController alloc] initWithNibName:@"PRPWebViewController" bundle:nil];
+    
     if ( theArticle.url == nil || [theArticle.url length] == 0) {
         
-        UIAlertView *linkIssue = [[UIAlertView alloc] initWithTitle:@"Missing Link" message:@"Sorry, the link to this article is missing.  Please try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        webView.url = [NSURL URLWithString:[NSString stringWithFormat:@"http://news.ycombinator.com/item?id=%@", theArticle.id_num]];
         
-        [linkIssue show];
-        [linkIssue release];
     }
-    else {
-
-        PRPWebViewController *webView = [[PRPWebViewController alloc] initWithNibName:@"PRPWebViewController" bundle:nil];
+    else 
+    {
         webView.url = [NSURL URLWithString:theArticle.url];
-        webView.showsDoneButton = NO;
-        webView.delegate = self;
-        webView.backgroundColor = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:231.0/255.0 alpha:1.0];
-        
-        [self.navigationController pushViewController:webView animated:YES];
-        
-        [webView release];
     }
+    
+    webView.articleID = [theArticle.id_num stringValue];
+    webView.showsDoneButton = NO;
+    webView.delegate = self;
+    webView.backgroundColor = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:231.0/255.0 alpha:1.0];
+    
+    [self.navigationController pushViewController:webView animated:YES];
+    
+    [webView release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -209,6 +268,21 @@
     [TestFlight passCheckpoint:@"RootViewController::didReceiveMemoryWarning"];
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
+        bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+        
+        CGRect frame = self.myTableView.frame;
+        NSLog(@"portrait: x %f y %f w %f h %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+        
+    } else {
+        bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        CGRect frame = self.myTableView.frame;
+        NSLog(@"landscape: x %f y %f w %f h %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+
+    }
+}
 
 -(IBAction)displayInfoView {
     
@@ -307,7 +381,8 @@
             [self doneLoadingData];
             
             //add the More button to the table footer
-            self.myTableView.tableFooterView = self.more;
+            self.myTableView.tableFooterView = self.footerView;
+            
             self.more.hidden = NO;
         }
     };
@@ -384,5 +459,37 @@
 	return [NSDate date]; // should return date data source was last changed
 	
 }
+
+#pragma iAdDelegate methods
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.bannerView.alpha = 1.0;
+                     }
+                     completion:nil];
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.bannerView.alpha = 0.0;
+                     }
+                     completion:nil];
+}
+
+- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
+{
+    return YES;
+}
+
+- (void)bannerViewActionDidFinish:(ADBannerView *)banner
+{
+   
+}
+
 
 @end

@@ -90,6 +90,25 @@
 		7786E8BF13FEB55600BD2093 /* headshot_andrew.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7786E8BE13FEB55600BD2093 /* headshot_andrew.jpg */; };
 		7786E8C513FEC49000BD2093 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7786E8C313FEC48E00BD2093 /* ConfigViewController.m */; };
 		7786E8C613FEC49000BD2093 /* ConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7786E8C413FEC48F00BD2093 /* ConfigViewController.xib */; };
+		DD02D0FF14B2A815001BF266 /* EasyTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = DD02D0FE14B2A815001BF266 /* EasyTracker.m */; };
+		DD02D10114B2A967001BF266 /* EasyTracker.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD02D10014B2A967001BF266 /* EasyTracker.plist */; };
+		DD02D10514B2ACE7001BF266 /* libGoogleAnalytics_NoThumb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD02D10314B2ACE7001BF266 /* libGoogleAnalytics_NoThumb.a */; };
+		DD02D10614B2ACE7001BF266 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD02D10414B2ACE7001BF266 /* libGoogleAnalytics.a */; };
+		DD02D10814B2AD5F001BF266 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD02D10714B2AD5F001BF266 /* CFNetwork.framework */; };
+		DD02D10A14B2AD7C001BF266 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DD02D10914B2AD7C001BF266 /* libsqlite3.0.dylib */; };
+		DD02D11214B3E541001BF266 /* comment_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = DD02D11014B3E541001BF266 /* comment_bubble.png */; };
+		DD02D11514B3E6AC001BF266 /* comment_bubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD02D11414B3E6AC001BF266 /* comment_bubble@2x.png */; };
+		DD02D11814B53682001BF266 /* comment_bubble_3d.png in Resources */ = {isa = PBXBuildFile; fileRef = DD02D11614B53682001BF266 /* comment_bubble_3d.png */; };
+		DD02D11914B53682001BF266 /* comment_bubble_3d@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD02D11714B53682001BF266 /* comment_bubble_3d@2x.png */; };
+		DD02D13C14B65B95001BF266 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD02D13B14B65B94001BF266 /* iAd.framework */; };
+		DD82056214A97F160072F110 /* splash_etch.png in Resources */ = {isa = PBXBuildFile; fileRef = DD82056014A97F160072F110 /* splash_etch.png */; };
+		DD82056314A97F160072F110 /* splash_etch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD82056114A97F160072F110 /* splash_etch@2x.png */; };
+		DD82056714AB6E250072F110 /* navbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = DD82056514AB6E250072F110 /* navbar_background.png */; };
+		DD82056814AB6E250072F110 /* navbar_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD82056614AB6E250072F110 /* navbar_background@2x.png */; };
+		DD85FD5B149ECD5D000F6D8E /* cell_background_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD85FD5A149ECD5D000F6D8E /* cell_background_check@2x.png */; };
+		DD85FD5D149ED068000F6D8E /* background_full.png in Resources */ = {isa = PBXBuildFile; fileRef = DD85FD5C149ED067000F6D8E /* background_full.png */; };
+		DD85FD6314A2E4CE000F6D8E /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD85FD6214A2E4CE000F6D8E /* Twitter.framework */; };
+		DD98E1D51482F89800FFF840 /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DD98E1D41482F89800FFF840 /* SDURLCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -218,6 +237,29 @@
 		7786E8C313FEC48E00BD2093 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		7786E8C413FEC48F00BD2093 /* ConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigViewController.xib; sourceTree = "<group>"; };
 		7786E8C713FEE1FB00BD2093 /* ConfigViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewControllerDelegate.h; sourceTree = "<group>"; };
+		DD02D0FD14B2A815001BF266 /* EasyTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyTracker.h; sourceTree = "<group>"; };
+		DD02D0FE14B2A815001BF266 /* EasyTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyTracker.m; sourceTree = "<group>"; };
+		DD02D10014B2A967001BF266 /* EasyTracker.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EasyTracker.plist; sourceTree = "<group>"; };
+		DD02D10214B2ACE7001BF266 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
+		DD02D10314B2ACE7001BF266 /* libGoogleAnalytics_NoThumb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_NoThumb.a; sourceTree = "<group>"; };
+		DD02D10414B2ACE7001BF266 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		DD02D10714B2AD5F001BF266 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		DD02D10914B2AD7C001BF266 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		DD02D11014B3E541001BF266 /* comment_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_bubble.png; sourceTree = "<group>"; };
+		DD02D11414B3E6AC001BF266 /* comment_bubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment_bubble@2x.png"; sourceTree = "<group>"; };
+		DD02D11614B53682001BF266 /* comment_bubble_3d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_bubble_3d.png; sourceTree = "<group>"; };
+		DD02D11714B53682001BF266 /* comment_bubble_3d@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment_bubble_3d@2x.png"; sourceTree = "<group>"; };
+		DD02D11A14B54826001BF266 /* Little Hack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Little Hack.entitlements"; sourceTree = "<group>"; };
+		DD02D13B14B65B94001BF266 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		DD82056014A97F160072F110 /* splash_etch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_etch.png; sourceTree = "<group>"; };
+		DD82056114A97F160072F110 /* splash_etch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash_etch@2x.png"; sourceTree = "<group>"; };
+		DD82056514AB6E250072F110 /* navbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar_background.png; sourceTree = "<group>"; };
+		DD82056614AB6E250072F110 /* navbar_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar_background@2x.png"; sourceTree = "<group>"; };
+		DD85FD5A149ECD5D000F6D8E /* cell_background_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_background_check@2x.png"; sourceTree = "<group>"; };
+		DD85FD5C149ED067000F6D8E /* background_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_full.png; sourceTree = "<group>"; };
+		DD85FD6214A2E4CE000F6D8E /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		DD98E1D31482F89800FFF840 /* SDURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDURLCache.h; sourceTree = "<group>"; };
+		DD98E1D41482F89800FFF840 /* SDURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDURLCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,12 +267,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD02D13C14B65B95001BF266 /* iAd.framework in Frameworks */,
+				DD02D10A14B2AD7C001BF266 /* libsqlite3.0.dylib in Frameworks */,
+				DD02D10814B2AD5F001BF266 /* CFNetwork.framework in Frameworks */,
+				DD85FD6314A2E4CE000F6D8E /* Twitter.framework in Frameworks */,
 				772D08D11403E54F000B9ADB /* MessageUI.framework in Frameworks */,
 				772D08AE140327D6000B9ADB /* QuartzCore.framework in Frameworks */,
 				7786E80613FDBCAC00BD2093 /* UIKit.framework in Frameworks */,
 				7786E80813FDBCAC00BD2093 /* Foundation.framework in Frameworks */,
 				7786E80A13FDBCAC00BD2093 /* CoreGraphics.framework in Frameworks */,
 				77591E96142FFE2C00E5A221 /* libTestFlight.a in Frameworks */,
+				DD02D10514B2ACE7001BF266 /* libGoogleAnalytics_NoThumb.a in Frameworks */,
+				DD02D10614B2ACE7001BF266 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +335,11 @@
 		7786E7F613FDBCAB00BD2093 = {
 			isa = PBXGroup;
 			children = (
+				DD02D13B14B65B94001BF266 /* iAd.framework */,
+				DD02D10914B2AD7C001BF266 /* libsqlite3.0.dylib */,
+				DD02D10714B2AD5F001BF266 /* CFNetwork.framework */,
+				DD02D0FC14B2A815001BF266 /* GoogleEasyTracker */,
+				DD85FD6214A2E4CE000F6D8E /* Twitter.framework */,
 				77591E91142FFE2C00E5A221 /* TestFlight */,
 				772D08E614041BEF000B9ADB /* Default@2x.png */,
 				772D08E414041BE5000B9ADB /* Default.png */,
@@ -323,6 +376,8 @@
 		7786E80B13FDBCAC00BD2093 /* HackerNews */ = {
 			isa = PBXGroup;
 			children = (
+				DD02D11A14B54826001BF266 /* Little Hack.entitlements */,
+				DD98E1D21482F89800FFF840 /* SDURLCache */,
 				772D08BB1403D91F000B9ADB /* RefreshTableHeaderView */,
 				7786E8B413FE9D2100BD2093 /* Helpers */,
 				7786E89E13FDD35700BD2093 /* SB JSON */,
@@ -387,6 +442,7 @@
 				775691201403205C00D9C983 /* InfoViewController.xib */,
 				772D08EC1404205B000B9ADB /* PRPWebViewController.xib */,
 				772D090014044104000B9ADB /* AttributionView.xib */,
+				DD02D10014B2A967001BF266 /* EasyTracker.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -462,6 +518,16 @@
 		7786E8BD13FEB55600BD2093 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DD02D11614B53682001BF266 /* comment_bubble_3d.png */,
+				DD02D11714B53682001BF266 /* comment_bubble_3d@2x.png */,
+				DD02D11414B3E6AC001BF266 /* comment_bubble@2x.png */,
+				DD02D11014B3E541001BF266 /* comment_bubble.png */,
+				DD82056514AB6E250072F110 /* navbar_background.png */,
+				DD82056614AB6E250072F110 /* navbar_background@2x.png */,
+				DD82056014A97F160072F110 /* splash_etch.png */,
+				DD82056114A97F160072F110 /* splash_etch@2x.png */,
+				DD85FD5C149ED067000F6D8E /* background_full.png */,
+				DD85FD5A149ECD5D000F6D8E /* cell_background_check@2x.png */,
 				7774CE7E14054A27003FD650 /* left_arrow@2x.png */,
 				7774CE7F14054A27003FD650 /* right_arrow@2x.png */,
 				772D090214048BA9000B9ADB /* Arrow.png */,
@@ -487,6 +553,28 @@
 				7786E8BE13FEB55600BD2093 /* headshot_andrew.jpg */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		DD02D0FC14B2A815001BF266 /* GoogleEasyTracker */ = {
+			isa = PBXGroup;
+			children = (
+				DD02D10214B2ACE7001BF266 /* GANTracker.h */,
+				DD02D10314B2ACE7001BF266 /* libGoogleAnalytics_NoThumb.a */,
+				DD02D10414B2ACE7001BF266 /* libGoogleAnalytics.a */,
+				DD02D0FD14B2A815001BF266 /* EasyTracker.h */,
+				DD02D0FE14B2A815001BF266 /* EasyTracker.m */,
+			);
+			name = GoogleEasyTracker;
+			path = HackerNews/GoogleEasyTracker;
+			sourceTree = "<group>";
+		};
+		DD98E1D21482F89800FFF840 /* SDURLCache */ = {
+			isa = PBXGroup;
+			children = (
+				DD98E1D31482F89800FFF840 /* SDURLCache.h */,
+				DD98E1D41482F89800FFF840 /* SDURLCache.m */,
+			);
+			path = SDURLCache;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -601,6 +689,17 @@
 				7774CE8114054A27003FD650 /* right_arrow@2x.png in Resources */,
 				77591E97142FFE2C00E5A221 /* README.txt in Resources */,
 				77591E98142FFE2C00E5A221 /* release_notes.txt in Resources */,
+				DD85FD5B149ECD5D000F6D8E /* cell_background_check@2x.png in Resources */,
+				DD85FD5D149ED068000F6D8E /* background_full.png in Resources */,
+				DD82056214A97F160072F110 /* splash_etch.png in Resources */,
+				DD82056314A97F160072F110 /* splash_etch@2x.png in Resources */,
+				DD82056714AB6E250072F110 /* navbar_background.png in Resources */,
+				DD82056814AB6E250072F110 /* navbar_background@2x.png in Resources */,
+				DD02D10114B2A967001BF266 /* EasyTracker.plist in Resources */,
+				DD02D11214B3E541001BF266 /* comment_bubble.png in Resources */,
+				DD02D11514B3E6AC001BF266 /* comment_bubble@2x.png in Resources */,
+				DD02D11814B53682001BF266 /* comment_bubble_3d.png in Resources */,
+				DD02D11914B53682001BF266 /* comment_bubble_3d@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +761,8 @@
 				775691191403019200D9C983 /* NSUserDefaults+PRPAdditions.m in Sources */,
 				775691211403205D00D9C983 /* InfoViewController.m in Sources */,
 				772D08C71403D920000B9ADB /* EGORefreshTableHeaderView.m in Sources */,
+				DD98E1D51482F89800FFF840 /* SDURLCache.m in Sources */,
+				DD02D0FF14B2A815001BF266 /* EasyTracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +856,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "HackerNews/Little Hack.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Little (ARHN4M8PM5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Little (ARHN4M8PM5)";
 				COPY_PHASE_STRIP = NO;
@@ -762,14 +864,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HackerNews/HackerNews-Prefix.pch";
 				INFOPLIST_FILE = "HackerNews/HackerNews-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/HackerNews/TestFlight\"",
+					"\"$(SRCROOT)/HackerNews/GoogleEasyTracker\"",
 				);
 				PRODUCT_NAME = "Little Hack";
-				PROVISIONING_PROFILE = "5FF602E5-60A3-47EE-ADBE-823286CEE484";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5FF602E5-60A3-47EE-ADBE-823286CEE484";
+				PROVISIONING_PROFILE = "FAD85D56-9B06-4FDF-B63E-BD3FD71C67E7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FAD85D56-9B06-4FDF-B63E-BD3FD71C67E7";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -779,20 +882,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Andrew Little (ARHN4M8PM5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andrew Little (ARHN4M8PM5)";
+				CODE_SIGN_ENTITLEMENTS = "HackerNews/Little Hack.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Andrew Little";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Little";
 				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HackerNews/HackerNews-Prefix.pch";
 				INFOPLIST_FILE = "HackerNews/HackerNews-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/HackerNews/TestFlight\"",
+					"\"$(SRCROOT)/HackerNews/GoogleEasyTracker\"",
 				);
 				PRODUCT_NAME = "Little Hack";
-				PROVISIONING_PROFILE = "6612B22F-309A-4C19-898F-C21F80A398BC";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6612B22F-309A-4C19-898F-C21F80A398BC";
+				PROVISIONING_PROFILE = "09544B45-1ADB-47EB-BA89-581756BF2EB4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "09544B45-1ADB-47EB-BA89-581756BF2EB4";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

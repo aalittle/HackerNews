@@ -13,6 +13,7 @@
 //  Copyright 2010 Bookhouse. All rights reserved.
 //
 
+#import <Twitter/Twitter.h>
 #import "PRPWebViewController.h"
 #import "TestFlight.h"
 
@@ -25,12 +26,14 @@ const float PRPWebViewControllerFadeDuration = 0.5;
 - (void)updateForwardBackButtonStatus;
 - (void)launchSafari;
 - (void)emailLink;
+- (void)tweetLink;
 
 @end
 
 @implementation PRPWebViewController
 
 @synthesize url;
+@synthesize articleID;
 
 @synthesize backgroundColor;
 @synthesize webView;
@@ -43,10 +46,12 @@ const float PRPWebViewControllerFadeDuration = 0.5;
 @synthesize forward;
 @synthesize refresh;
 @synthesize action;
+@synthesize comments;
+@synthesize toolbar;
 
 - (void)dealloc {
     [url release], url = nil;
-    
+    [articleID release], articleID = nil;
     [backgroundColor release], backgroundColor = nil;
     [webView stopLoading], webView.delegate = nil, [webView release], webView = nil;
     [activityIndicator release], activityIndicator = nil;
@@ -55,6 +60,8 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     [refresh release], refresh = nil;
     [back release], back = nil;
     [action release], action = nil;
+    [comments release], comments = nil;
+    [toolbar release], toolbar = nil;
     
     [super dealloc];
 }
@@ -68,6 +75,8 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     self.forward = nil;
     self.action = nil;
     self.refresh = nil;
+    self.comments = nil;
+    self.toolbar = nil;
 }
 
 - (void)viewDidLoad {
@@ -92,6 +101,24 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     aiFrame.origin.y = floorl(originY);
     self.activityIndicator.frame = aiFrame;
     [self.view addSubview:activityIndicator];
+    
+    UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+    NSDictionary *attr = [[NSDictionary alloc] initWithObjectsAndKeys:font, UITextAttributeFont, nil];
+    [self.navigationController.navigationBar setTitleTextAttributes:attr];
+    [attr release];
+    
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:4.0 forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:2.0 forBarMetrics:UIBarMetricsLandscapePhone];
+    
+    //If the article id is not set, then don't display the comments button
+    if (!articleID) {
+        self.comments.width = 0.0;
+        
+        NSMutableArray *reducedToolbar = [NSMutableArray arrayWithArray:[toolbar items]];
+        [reducedToolbar removeObjectIdenticalTo:self.comments];
+        
+        [toolbar setItems:(NSArray *)reducedToolbar];
+    }
     
     [self resetBackgroundColor];
     [self reload];
@@ -123,7 +150,9 @@ const float PRPWebViewControllerFadeDuration = 0.5;
 
 - (void)reload {
     if (self.url) {
-        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+        
+        NSURLRequest *theRequest = [NSURLRequest requestWithURL:self.url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:20.0];        
+        [self.webView loadRequest:theRequest];
         self.webView.alpha = 0.0;
         [self.activityIndicator startAnimating];        
     }
@@ -170,6 +199,7 @@ const float PRPWebViewControllerFadeDuration = 0.5;
 #pragma mark UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)wv {
+    
     [self.activityIndicator stopAnimating];
     [self fadeWebViewIn];
     if (self.title == nil) {
@@ -194,12 +224,14 @@ const float PRPWebViewControllerFadeDuration = 0.5;
         [self.delegate webController:self didFailLoadWithError:error];
     } else {
         if ([error code] != kCFURLErrorCancelled) {            
+            /*
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Load Failed"
                                                             message:@"The web page failed to load."
                                                            delegate:nil cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
             [alert release];
+             */
         }
     }
     
@@ -223,9 +255,29 @@ const float PRPWebViewControllerFadeDuration = 0.5;
 
 -(IBAction)onAction {
  
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[self.url description] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open in Safari", @"Mail Link", @"Copy Link", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[self.url description] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Tweet Link",@"Open in Safari", @"Mail Link", @"Copy Link", nil];
     
     [sheet showInView:self.view];
+}
+
+-(IBAction)onComments
+{
+    PRPWebViewController *commentsView = [[PRPWebViewController alloc] initWithNibName:@"PRPWebViewController" bundle:nil];
+
+    commentsView.url = [NSURL URLWithString:[NSString stringWithFormat:@"http://news.ycombinator.com/item?id=%@", articleID]];
+
+    
+    commentsView.showsDoneButton = YES;
+    commentsView.backgroundColor = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:231.0/255.0 alpha:1.0];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:commentsView];
+    navController.navigationBar.tintColor = [UIColor colorWithRed:249.0/255.0 green:82.0/255.0 blue:0.0 alpha:1.0];
+    navController.title = @"Hacker Comments";
+
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    [commentsView release];    
 }
 
 -(void)updateForwardBackButtonStatus {
@@ -271,6 +323,27 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     [mailController release];
 }
 
+-(void)tweetLink
+{
+    // Set up the built-in twitter composition view controller.
+    TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
+    
+    // Set the initial tweet text. See the framework for additional properties that can be set.
+    [tweetViewController setInitialText:@""];
+
+    [tweetViewController addURL:url];
+    
+    // Create the completion handler block.
+    [tweetViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
+        
+        // Dismiss the tweet composition view controller.
+        [self dismissModalViewControllerAnimated:YES];
+    }];
+    
+    // Present the tweet composition view controller modally.
+    [self presentModalViewController:tweetViewController animated:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -303,22 +376,26 @@ const float PRPWebViewControllerFadeDuration = 0.5;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
     
-    //if the Safari button, then launch Safari
-    if (buttonIndex == 0) {
-        
-        [self launchSafari];
-    }
-    //if it's the Mail Link button, then launch the mail composer
-    else if (buttonIndex == 1) {
-        
-        [self emailLink];
-    }
-    else if (buttonIndex == 2) {
-        
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        pasteboard.string = [self.url description];
-    }
+    UIPasteboard *pasteboard;
     
+    //if the Safari button, then launch Safari
+    switch (buttonIndex) {
+        case 0:
+            [self tweetLink];
+            break;
+        case 1:
+            [self launchSafari];
+            break;
+        case 2:
+            [self emailLink];
+            break;
+        case 3:
+            pasteboard = [UIPasteboard generalPasteboard];
+            pasteboard.string = [self.url description];
+            break;            
+        default:
+            break;
+    }
 }
 
 

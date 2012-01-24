@@ -62,7 +62,6 @@
         dateFormat.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease];
         theDate = [dateFormat dateFromString:self.create_ts];
         
-        NSLog(@"date %@", [theDate description]);
         [dateFormat release];
     }
     return theDate;

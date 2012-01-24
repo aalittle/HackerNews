@@ -14,11 +14,15 @@
     UILabel *labelTitle;
     UILabel *labelSubtitle;
     UILabel *labelSinceCreated;
+    
+    UILabel *labelComments;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *labelTitle;
 @property (nonatomic, retain) IBOutlet UILabel *labelSubtitle;
 @property (nonatomic, retain) IBOutlet UILabel *labelSinceCreated;
+@property (nonatomic, retain) IBOutlet UILabel *labelComments;
+
 
 -(void)redisplay;
 

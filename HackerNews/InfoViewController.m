@@ -139,6 +139,8 @@
     } else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.twitter.com/aalittle"]];
     }
+    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction)onCredits {

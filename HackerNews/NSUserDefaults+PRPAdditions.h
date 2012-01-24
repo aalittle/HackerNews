@@ -16,9 +16,9 @@
 
 #import <Foundation/Foundation.h>
 
-#define FRESHNESS_DEFAULT 500.00
-#define POINTS_DEFAULT      0.30      
-#define COMMENTS_DEFAULT    0.15
+#define FRESHNESS_DEFAULT   1200.00
+#define POINTS_DEFAULT       0.3247      
+#define COMMENTS_DEFAULT     0.1293
 
 
 @interface NSUserDefaults (PRPAdditions) 

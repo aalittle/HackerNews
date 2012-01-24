@@ -63,7 +63,7 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)] autorelease];
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save)] autorelease];
-    self.navigationItem.title = @"Configure Search";
+    self.navigationItem.title = @"News Ranking";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
