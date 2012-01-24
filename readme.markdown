@@ -9,6 +9,6 @@ Please enjoy.
 
 Little Hack is iPhone 5.0+ compatible and released under the MIT license.
 
-[![](http://dl.dropbox.com/u/6148369/screenshots/MultiTableView.png)](http://dl.dropbox.com/u/6148369/screenshots/MultiTableView.png)
+[![](http://dl.dropbox.com/u/6148369/screenshots/hackernews_screen.png)](http://dl.dropbox.com/u/6148369/screenshots/hackernews_screen.png)
 
 http://twitter.com/aalittle
