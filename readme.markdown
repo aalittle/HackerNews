@@ -1,5 +1,6 @@
 Little Hack (author: Andrew Little)
 ================================================
+http://twitter.com/aalittle
 
 Little Hack started as a weekend project to create an application that I felt was missing from the app store.  I wanted a single use app that would allow me to quickly read through Hacker News articles without having to launch Safari and pinch and pan my way around the site.
 
@@ -11,4 +12,4 @@ Little Hack is iPhone 5.0+ compatible and released under the MIT license.
 
 [![](http://dl.dropbox.com/u/6148369/screenshots/hackernews_screen.png)](http://dl.dropbox.com/u/6148369/screenshots/hackernews_screen.png)
 
-http://twitter.com/aalittle
+
